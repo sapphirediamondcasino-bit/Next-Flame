@@ -1,1 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextFlame - Find Your Vibe</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:system-ui,sans-serif;background:#0a0a0f;min-height:100vh;color:#fff;overflow-x:hidden}
+        .bg-animate{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;background:linear-gradient(125deg,#0a0a0f,#1a0a20,#0f1a2a,#1a0a20,#0a0a0f);background-size:400% 400%;animation:grad 15s ease infinite}
+        @keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        .particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+        .p{position:absolute;width:4px;height:4px;background:#f5576c;border-radius:50%;opacity:0.3;animation:fl 20s infinite}
+        .p:nth-child(2){left:20%;animation-delay:2s;background:#8b5cf6}.p:nth-child(3){left:40%;animation-delay:4s;background:#22c55e}
+        .p:nth-child(4){left:60%;animation-delay:6s;background:#ffd700}.p:nth-child(5){left:80%;animation-delay:8s;background:#ec4899}
+        @keyframes fl{0%{transform:translateY(100vh);opacity:0}10%{opacity:0.5}90%{opacity:0.3}100%{transform:translateY(-100vh);opacity:0}}
+        .banner{background:linear-gradient(90deg,#f5576c,#8b5cf6,#f5576c);background-size:200%;animation:sh 3s linear infinite;padding:8px;text-align:center;font-size:11px;font-weight:600}
+        @keyframes sh{0%{background-position:200%}100%{background-position:-200%}}
+        header{background:rgba(0,0,0,0.6);backdrop-filter:blur(20px);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .logo{font-size:24px;font-weight:bold;background:linear-gradient(135deg,#f5576c,#ff8c42);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+        .cred-box{background:linear-gradient(135deg,#ffd700,#ff8c00);padding:6px 12px;border-radius:15px;font-weight:bold;color:#000;font-size:12px}
+        button{padding:8px 18px;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.3s}
+        .bp{background:linear-gradient(135deg,#f5576c,#8b5cf6);color:#fff}.bp:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(245,87,108,0.5)}
+        .bs{background:rgba(255,255,255,0.1);color:#fff}.bs:hover{background:rgba(255,255,255,0.2)}
+        .bd{background:#dc3545;color:#fff}.bg{background:#22c55e;color:#fff}.bsm{padding:5px 10px;font-size:11px}
+        .container{max-width:1100px;margin:0 auto;padding:15px}
+        .hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;position:relative}
+        .glow{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(245,87,108,0.15),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 4s ease-in-out infinite}
+        @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.2)}}
+        .hero h1{font-size:clamp(32px,8vw,64px);margin-bottom:10px}
+        .hero h1 .l1{display:block;color:#fff}
+        .hero h1 .l2{display:block;background:linear-gradient(135deg,#f5576c,#ff8c42,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:tg 3s ease infinite;background-size:200%}
+        @keyframes tg{0%,100%{background-position:0%}50%{background-position:100%}}
+        .hero-sub{font-size:clamp(14px,3vw,20px);color:rgba(255,255,255,0.7);margin:20px 0 30px;max-width:550px}
+        .vibes{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:25px 0}
+        .vibe{background:rgba(255,255,255,0.05);padding:10px 22px;border-radius:30px;font-size:14px;border:1px solid rgba(255,255,255,0.1);transition:all 0.3s}
+        .vibe:hover{transform:translateY(-3px)}
+        .v-gamer:hover{background:rgba(59,130,246,0.2);border-color:#3b82f6}.v-stoner:hover{background:rgba(34,197,94,0.2);border-color:#22c55e}
+        .v-artist:hover{background:rgba(236,72,153,0.2);border-color:#ec4899}.v-nerd:hover{background:rgba(139,92,246,0.2);border-color:#8b5cf6}
+        .cta{padding:16px 45px;font-size:17px;border-radius:30px;background:linear-gradient(135deg,#f5576c,#8b5cf6);box-shadow:0 5px 25px rgba(245,87,108,0.4);position:relative;overflow:hidden}
+        .cta::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:0.5s}
+        .cta:hover::before{left:100%}
+        .feats{display:flex;gap:25px;margin-top:40px;flex-wrap:wrap;justify-content:center}
+        .feat{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.6)}
+        .stats{display:flex;justify-content:center;gap:35px;margin-top:50px;flex-wrap:wrap}
+        .stat-n{font-size:32px;font-weight:bold;background:linear-gradient(135deg,#ffd700,#ff8c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .stat-l{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase}
+        
+        /* Featured profiles - REAL USERS ONLY */
+        .featured{margin-top:60px;text-align:center}
+        .featured h3{font-size:18px;margin-bottom:20px;color:rgba(255,255,255,0.6)}
+        .featured-cards{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+        .fcard{width:160px;height:220px;background:rgba(255,255,255,0.05);border-radius:16px;border:1px solid rgba(255,255,255,0.1);overflow:hidden;transition:all 0.4s;position:relative;text-align:center;padding-top:25px}
+        .fcard:hover{transform:translateY(-8px);box-shadow:0 15px 30px rgba(0,0,0,0.3)}
+        .fcard .av{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);margin:0 auto 10px;border:2px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:24px}
+        .fcard .nm{font-weight:bold;font-size:14px}.fcard .ag{color:rgba(255,255,255,0.5);font-size:11px}
+        .fcard .vi{margin-top:8px;font-size:16px}
+        .fcard:nth-child(1){animation:cf 4s ease-in-out infinite}.fcard:nth-child(2){animation:cf 4s ease-in-out infinite 0.3s}.fcard:nth-child(3){animation:cf 4s ease-in-out infinite 0.6s}
+        @keyframes cf{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+        .no-featured{color:rgba(255,255,255,0.4);font-size:14px;padding:40px;background:rgba(255,255,255,0.03);border-radius:16px;border:1px dashed rgba(255,255,255,0.1)}
+        
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:1000;overflow-y:auto}
+        .mc{background:#1a1a2e;margin:15px auto;padding:20px;border-radius:16px;max-width:95%;width:480px;position:relative;border:1px solid rgba(255,255,255,0.1)}
+        .mc.wide{width:900px}
+        .close{position:absolute;right:15px;top:10px;font-size:22px;cursor:pointer}
+        .fg{margin-bottom:10px}.fg label{display:block;margin-bottom:3px;font-size:11px;color:rgba(255,255,255,0.7)}
+        .fg input,.fg select,.fg textarea{width:100%;padding:9px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.05);color:#fff;font-size:12px}
+        .fg input:focus,.fg select:focus{outline:none;border-color:#f5576c}
+        .fr{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:12px;overflow-x:auto}
+        .tab{padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;color:rgba(255,255,255,0.5);font-size:12px}
+        .tab.active{border-color:#f5576c;color:#fff}
+        .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:14px;margin-bottom:10px}
+        .badge{display:inline-block;padding:2px 7px;border-radius:6px;font-size:9px;font-weight:bold;margin:1px}
+        .b-founder{background:linear-gradient(135deg,#ffd700,#ff8c00);color:#000}.b-verified{background:#f5576c;color:#fff}
+        .b-stoner{background:#22c55e;color:#fff}.b-artist{background:#ec4899;color:#fff}.b-gamer{background:#3b82f6;color:#fff}
+        .b-nerd{background:#8b5cf6;color:#fff}.b-og{background:#f59e0b;color:#000}.b-vip{background:#ef4444;color:#fff}.b-custom{background:#14b8a6;color:#fff}
+        .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+        @media(max-width:700px){.g2,.g3,.fr{grid-template-columns:1fr}}
+        .daily{background:linear-gradient(135deg,#ffd700,#ff8c00);border-radius:12px;padding:14px;text-align:center;color:#000;margin-bottom:12px}
+        .streak{font-size:26px;font-weight:bold}
+        .abox{background:rgba(0,0,0,0.3);border-radius:10px;padding:12px;margin-bottom:10px}.abox h3{margin-bottom:8px;color:#f5576c;font-size:13px}
+        .urow{display:flex;justify-content:space-between;align-items:center;padding:8px;background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:5px;flex-wrap:wrap;gap:6px;font-size:11px}
+        .tier{background:rgba(255,255,255,0.03);border-radius:12px;padding:14px;text-align:center;border:1px solid rgba(255,255,255,0.05);transition:all 0.3s}
+        .tier:hover{border-color:#f5576c;transform:translateY(-3px)}
+        .tier h3{color:#f5576c;font-size:14px}.tier-p{font-size:26px;font-weight:bold;margin:6px 0}
+        .tier-c{background:linear-gradient(135deg,#ffd700,#ff8c00);color:#000;padding:4px 10px;border-radius:10px;font-size:10px;font-weight:bold}
+        .tier-l{list-style:none;text-align:left;margin:10px 0;font-size:10px}.tier-l li{padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.05)}.tier-l li::before{content:"✓ ";color:#22c55e}
+        .hidden{display:none}.st-a{color:#22c55e}.st-b{color:#ef4444}
+        .consent-box{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:8px;padding:10px;margin:10px 0}
+        .consent-box label{font-size:11px;display:flex;align-items:flex-start;gap:8px}
+    </style>
+</head>
+<body>
+<div class="bg-animate"></div>
+<div class="particles"><div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div></div>
+<div class="banner">🔥 18+ • FREE Messaging Forever • Earn Credits Daily • Minnesota Law</div>
+<header>
+    <div class="logo">🔥 NextFlame</div>
+    <div class="nav">
+        <div class="cred-box hidden" id="cBox">🪙 <span id="cNum">0</span></div>
+        <button class="bs" id="liBtn">Sign In</button>
+        <button class="bp" id="suBtn">Join Free</button>
+        <button class="bs hidden" id="daBtn">Dashboard</button>
+        <button class="bp hidden" id="adBtn">🛡️Admin</button>
+        <button class="bs hidden" id="loBtn">Logout</button>
+    </div>
+</header>
+<div id="hero"><div class="hero">
+    <div class="glow"></div>
+    <h1><span class="l1">Find Your Vibe.</span><span class="l2">Find Your Person.</span></h1>
+    <p class="hero-sub">The dating app for people who'd rather game, create, or chill than go to some boring bar. No judgment. Just real connections.</p>
+    <div class="vibes">
+        <span class="vibe v-gamer">🎮 Gamers</span><span class="vibe v-stoner">🌿 Stoners</span>
+        <span class="vibe v-artist">🎨 Artists</span><span class="vibe v-nerd">🤓 Nerds</span>
+    </div>
+    <button class="cta" onclick="showM('suM')">Start Free Today</button>
+    <div class="feats">
+        <div class="feat">💬 Free messaging</div><div class="feat">🪙 Daily credits</div><div class="feat">🔒 No data sales</div>
+    </div>
+    <div class="stats">
+        <div><div class="stat-n">100%</div><div class="stat-l">Free to chat</div></div>
+        <div><div class="stat-n">18+</div><div class="stat-l">Verified</div></div>
+        <div><div class="stat-n">24/7</div><div class="stat-l">Support</div></div>
+    </div>
+    
+    <!-- REAL USERS ONLY - who consented -->
+    <div class="featured">
+        <h3>✨ Featured Members</h3>
+        <div class="featured-cards" id="featuredUsers"></div>
+    </div>
+</div></div>
+<div class="container hidden" id="app"></div>
 
+<div class="modal" id="suM"><div class="mc">
+    <span class="close" onclick="closeM('suM')">×</span>
+    <h2 style="margin-bottom:12px">Join NextFlame 🔥</h2>
+    <form id="suF">
+        <div class="fr"><div class="fg"><label>Email</label><input type="email" id="sE" required></div><div class="fg"><label>Name</label><input id="sN" required></div></div>
+        <div class="fr"><div class="fg"><label>Password</label><input type="password" id="sP" required minlength="8"></div><div class="fg"><label>DOB (18+)</label><input type="date" id="sD" required></div></div>
+        <div class="fr"><div class="fg"><label>ZIP</label><input id="sZ" required pattern="[0-9]{5}"></div><div class="fg"><label>I'm a</label><select id="sG" required><option value="">-</option><option>Man</option><option>Woman</option><option>Non-binary</option></select></div></div>
+        <div class="fg"><label>Looking for</label><select id="sL" required><option value="">-</option><option>Men</option><option>Women</option><option>Everyone</option></select></div>
+        <div class="fg"><label>Vibes</label><div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px"><label><input type="checkbox" id="vG">🎮Gamer</label><label><input type="checkbox" id="vS">🌿Stoner</label><label><input type="checkbox" id="vA">🎨Artist</label><label><input type="checkbox" id="vN">🤓Nerd</label></div></div>
+        <div class="fg"><label>Bio (50+)</label><textarea id="sB" required minlength="50" rows="2"></textarea></div>
+        
+        <div class="fg"><label style="font-size:10px"><input type="checkbox" required> I'm 18+ and agree to Terms of Service & Privacy Policy</label></div>
+        
+        <!-- OPTIONAL CONSENT FOR FEATURING -->
+        <div class="consent-box">
+            <label><input type="checkbox" id="consentFeatured"> 
+            <span><strong>Optional:</strong> I consent to being featured on the homepage. My name, age, and vibes may be shown to help promote NextFlame. (You can change this anytime in settings)</span></label>
+        </div>
+        
+        <button type="submit" class="bp" style="width:100%;padding:11px">Create Account (+100🪙)</button>
+    </form>
+</div></div>
+
+<div class="modal" id="liM"><div class="mc">
+    <span class="close" onclick="closeM('liM')">×</span>
+    <h2 style="margin-bottom:12px">Welcome Back 🔥</h2>
+    <form id="liF">
+        <div class="fg"><label>Email</label><input type="email" id="lE" required></div>
+        <div class="fg"><label>Password</label><input type="password" id="lP" required></div>
+        <button type="submit" class="bp" style="width:100%;padding:11px">Sign In</button>
+    </form>
+</div></div>
+
+<div class="modal" id="adM"><div class="mc wide">
+    <span class="close" onclick="closeM('adM')">×</span>
+    <h2 style="margin-bottom:10px">🛡️ Admin Panel</h2>
+    <div class="tabs" id="aT"><div class="tab active" data-t="users">👥Users</div><div class="tab" data-t="badges">🏅Badges</div><div class="tab" data-t="credits">🪙Credits</div><div class="tab" data-t="settings">⚙️Settings</div><div class="tab" data-t="featured">⭐Featured</div><div class="tab" data-t="logs">📜Logs</div></div>
+    <div id="aC"></div>
+</div></div>
+
+<script>
+const FE='tannerkurrasch@gmail.com';
+let me=null,DB={users:[],badges:[{id:'founder',n:'👑 Founder',c:'b-founder'},{id:'verified',n:'✓ Verified',c:'b-verified'},{id:'stoner',n:'🌿 Stoner',c:'b-stoner'},{id:'artist',n:'🎨 Artist',c:'b-artist'},{id:'gamer',n:'🎮 Gamer',c:'b-gamer'},{id:'nerd',n:'🤓 Nerd',c:'b-nerd'},{id:'og',n:'⭐ OG',c:'b-og'},{id:'vip',n:'💎 VIP',c:'b-vip'}],logs:[],cfg:{daily:10,streak:5,msg:2,boost:50,sboost:150,conCr:200,plusCr:500,premCr:1500}};
+if(window.NF)DB=window.NF;const save=()=>window.NF=DB;
+const showM=i=>document.getElementById(i).style.display='block';
+const closeM=i=>document.getElementById(i).style.display='none';
+const age=d=>{let b=new Date(d),t=new Date(),a=t.getFullYear()-b.getFullYear();if(t.getMonth()<b.getMonth()||(t.getMonth()===b.getMonth()&&t.getDate()<b.getDate()))a--;return a};
+const fU=e=>DB.users.find(u=>u.email===e);
+const log=(a,d)=>{DB.logs.unshift({t:Date.now(),a,d,by:me?.name||'Sys'});if(DB.logs.length>50)DB.logs.pop();save()};
+const bH=ids=>ids.map(id=>{const b=DB.badges.find(x=>x.id===id);return b?`<span class="badge ${b.c}">${b.n}</span>`:''}).join('');
+const vi={gamer:'🎮',stoner:'🌿',artist:'🎨',nerd:'🤓'};
+
+// Render featured users (ONLY those who consented)
+function renderFeatured(){
+    const fc=document.getElementById('featuredUsers');
+    const featured=DB.users.filter(u=>u.consentFeatured&&u.status==='active');
+    if(featured.length===0){
+        fc.innerHTML=`<div class="no-featured">Be the first to be featured!<br><small>When you sign up, you can opt-in to be shown here.</small></div>`;
+    }else{
+        fc.innerHTML=featured.slice(0,6).map(u=>`
+            <div class="fcard">
+                <div class="av">${u.name.charAt(0).toUpperCase()}</div>
+                <div class="nm">${u.name}</div>
+                <div class="ag">${u.age}</div>
+                <div class="vi">${u.vibes.map(v=>vi[v]).join('')}</div>
+            </div>
+        `).join('');
+    }
+}
+
+document.getElementById('liBtn').onclick=()=>showM('liM');
+document.getElementById('suBtn').onclick=()=>showM('suM');
+document.getElementById('loBtn').onclick=()=>{me=null;upUI()};
+document.getElementById('daBtn').onclick=()=>rDash();
+document.getElementById('adBtn').onclick=()=>{showM('adM');rAdmin('users')};
+document.getElementById('aT').onclick=e=>{if(e.target.dataset.t){document.querySelectorAll('#aT .tab').forEach(x=>x.classList.remove('active'));e.target.classList.add('active');rAdmin(e.target.dataset.t)}};
+
+document.getElementById('suF').onsubmit=e=>{
+    e.preventDefault();
+    const em=document.getElementById('sE').value;
+    if(age(document.getElementById('sD').value)<18)return alert('18+ only');
+    if(fU(em))return alert('Email exists');
+    const v=[];
+    if(document.getElementById('vG').checked)v.push('gamer');
+    if(document.getElementById('vS').checked)v.push('stoner');
+    if(document.getElementById('vA').checked)v.push('artist');
+    if(document.getElementById('vN').checked)v.push('nerd');
+    const isF=em.toLowerCase()===FE;
+    const consentFeatured=document.getElementById('consentFeatured').checked;
+    const u={id:'u'+Date.now(),email:em,pw:btoa(document.getElementById('sP').value),name:document.getElementById('sN').value,dob:document.getElementById('sD').value,age:age(document.getElementById('sD').value),zip:document.getElementById('sZ').value,gender:document.getElementById('sG').value,look:document.getElementById('sL').value,vibes:v,bio:document.getElementById('sB').value,badges:isF?['founder']:[],credits:100,streak:0,lastD:null,sub:'free',msgs:0,warns:0,admin:isF,founder:isF,status:'active',joined:Date.now(),consentFeatured};
+    DB.users.push(u);log('signup',u.name+(consentFeatured?' (featured consent)':''));save();me=u;closeM('suM');
+    alert('Welcome!🔥+100 credits'+(isF?'\n👑FOUNDER ACCESS!':'')+(consentFeatured?'\n⭐You may be featured on homepage!':''));
+    renderFeatured();upUI();
+};
+
+document.getElementById('liF').onsubmit=e=>{e.preventDefault();const u=fU(document.getElementById('lE').value);if(!u||u.pw!==btoa(document.getElementById('lP').value))return alert('Invalid');if(u.status==='banned')return alert('Banned');me=u;save();closeM('liM');chkDaily();upUI()};
+
+function chkDaily(){if(!me)return;const td=new Date().toDateString();if(me.lastD===td)return;const yd=new Date(Date.now()-864e5).toDateString();me.streak=me.lastD===yd?me.streak+1:1;const r=DB.cfg.daily+(me.streak*DB.cfg.streak);me.credits+=r;me.lastD=td;log('daily',me.name+'+'+r);save();setTimeout(()=>alert('🎁+'+r+' credits!\n🔥'+me.streak+' day streak!'),200)}
+
+function upUI(){const on=!!me;document.getElementById('hero').style.display=on?'none':'block';document.getElementById('app').classList.toggle('hidden',!on);document.getElementById('liBtn').classList.toggle('hidden',on);document.getElementById('suBtn').classList.toggle('hidden',on);document.getElementById('daBtn').classList.toggle('hidden',!on);document.getElementById('loBtn').classList.toggle('hidden',!on);document.getElementById('cBox').classList.toggle('hidden',!on);document.getElementById('adBtn').classList.toggle('hidden',!on||!me?.admin);if(on){document.getElementById('cNum').textContent=me.credits;rDash()}}
+
+function rDash(){
+    const nx=DB.cfg.daily+((me.streak+1)*DB.cfg.streak);
+    document.getElementById('app').innerHTML=`
+    <div class="daily"><h3>🎁 Daily</h3><div class="streak">🔥${me.streak} Days</div><p style="font-size:11px">Tomorrow:+${nx}</p></div>
+    <div class="g2">
+        <div class="card"><h3>${me.name},${me.age} ${bH(me.badges)}</h3><p style="font-size:11px;color:rgba(255,255,255,0.6);margin:5px 0">${me.bio}</p><p style="font-size:11px">📍${me.zip} ${me.vibes.map(x=>vi[x]).join('')}</p><p style="font-size:11px;margin-top:4px">💬${me.msgs} • 💎${me.sub}</p>
+        <p style="font-size:10px;margin-top:8px;color:rgba(255,255,255,0.4)">Featured: ${me.consentFeatured?'✅ Yes':'❌ No'} <button class="bsm bs" onclick="toggleFeatured()">${me.consentFeatured?'Opt Out':'Opt In'}</button></p></div>
+        <div class="card"><h3>🪙${me.credits}</h3><p style="font-size:11px;margin:5px 0">Use for boosts</p><button class="bp bsm" onclick="boost()">⚡Boost(${DB.cfg.boost})</button> <button class="bp bsm" onclick="sboost()">🚀Super(${DB.cfg.sboost})</button><p style="font-size:9px;margin-top:5px;color:rgba(255,255,255,0.4)">+${DB.cfg.msg}/msg</p></div>
+    </div>
+    <button class="bs" style="margin:10px 0" onclick="tMsg()">💬Test Msg(+${DB.cfg.msg})</button>
+    <h3 style="margin:12px 0 8px">💎Subscriptions</h3>
+    <div class="g3">
+        <div class="tier"><h3>Connect</h3><div class="tier-p">$3.99</div><div class="tier-c">+${DB.cfg.conCr}/mo</div><ul class="tier-l"><li>12hr highlight</li><li>5 filters</li><li>30 receipts</li></ul><button class="bp bsm" onclick="sub('connect',${DB.cfg.conCr})">Get</button></div>
+        <div class="tier"><h3>Plus</h3><div class="tier-p">$8.99</div><div class="tier-c">+${DB.cfg.plusCr}/mo</div><ul class="tier-l"><li>All Connect</li><li>∞ receipts</li><li>See likes</li></ul><button class="bp bsm" onclick="sub('plus',${DB.cfg.plusCr})">Get</button></div>
+        <div class="tier"><h3>Premium</h3><div class="tier-p">$19.99</div><div class="tier-c">+${DB.cfg.premCr}/mo</div><ul class="tier-l"><li>All Plus</li><li>Daily boosts</li><li>Priority</li></ul><button class="bp bsm" onclick="sub('premium',${DB.cfg.premCr})">Get</button></div>
+    </div>`;
+}
+
+function toggleFeatured(){me.consentFeatured=!me.consentFeatured;log('featured_toggle',me.name+':'+(me.consentFeatured?'on':'off'));save();alert(me.consentFeatured?'You can now be featured on the homepage!':'You will no longer be featured.');rDash()}
+function boost(){if(me.credits<DB.cfg.boost)return alert('Need credits!');me.credits-=DB.cfg.boost;log('boost',me.name);save();alert('⚡Boosted!');upUI()}
+function sboost(){if(me.credits<DB.cfg.sboost)return alert('Need credits!');me.credits-=DB.cfg.sboost;log('sboost',me.name);save();alert('🚀Super!');upUI()}
+function tMsg(){me.msgs++;me.credits+=DB.cfg.msg;log('msg',me.name);save();alert('💬+'+DB.cfg.msg);upUI()}
+function sub(t,c){if(confirm(t+' for +'+c+'/mo?')){me.sub=t;me.credits+=c;log('sub',me.name+':'+t);save();alert('💎'+t+'!+'+c);upUI()}}
+
+function rAdmin(t){
+    const c=document.getElementById('aC');
+    if(t==='users'){
+        c.innerHTML=`<div class="abox"><h3>Users(${DB.users.length})</h3>${DB.users.map(u=>`<div class="urow">
+            <div><b>${u.name}</b> ${bH(u.badges)} <span class="st-${u.status==='active'?'a':'b'}">[${u.status}]</span> ${u.consentFeatured?'⭐':''}<br>
+            <small>${u.email}•🪙${u.credits}•${u.sub}</small></div>
+            <div><button class="bsm bg" onclick="gBadge('${u.id}')">+Badge</button>
+            <button class="bsm bs" onclick="gCred('${u.id}')">+Cred</button>
+            <button class="bsm bd" onclick="banU('${u.id}')">${u.status==='banned'?'Unban':'Ban'}</button>
+            ${!u.admin?`<button class="bsm bp" onclick="mkAdmin('${u.id}')">Admin</button>`:''}</div></div>`).join('')||'<p>No users yet</p>'}</div>`;
+    }else if(t==='badges'){
+        c.innerHTML=`<div class="abox"><h3>Badges</h3><p style="margin-bottom:10px">${DB.badges.map(b=>`<span class="badge ${b.c}">${b.n}</span>`).join(' ')}</p>
+            <h4 style="margin:10px 0 8px;font-size:12px">Create New Badge</h4>
+            <div style="display:flex;gap:6px;flex-wrap:wrap"><input id="nBN" placeholder="e.g. 🏆 Champion" style="flex:1;min-width:150px;padding:7px;border-radius:5px;background:rgba(0,0,0,0.3);color:#fff;border:1px solid rgba(255,255,255,0.2)">
+            <button class="bp" onclick="mkBadge()">Create</button></div></div>`;
+    }else if(t==='credits'){
+        c.innerHTML=`<div class="abox"><h3>Give Credits</h3>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+                <select id="gU" style="flex:1;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px">${DB.users.map(u=>`<option value="${u.id}">${u.name}(${u.credits})</option>`).join('')}</select>
+                <input type="number" id="gA" value="100" style="width:80px;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px">
+                <button class="bg" onclick="giveC()">Give</button></div>
+            <button class="bs bsm" onclick="giveAll(50)">+50 All</button>
+            <button class="bs bsm" onclick="giveAll(100)">+100 All</button></div>`;
+    }else if(t==='settings'){
+        c.innerHTML=`<div class="abox"><h3>Settings</h3><div class="g2">
+            <div class="fg"><label>Daily Base</label><input type="number" id="cD" value="${DB.cfg.daily}"></div>
+            <div class="fg"><label>Streak Bonus</label><input type="number" id="cS" value="${DB.cfg.streak}"></div>
+            <div class="fg"><label>Msg Reward</label><input type="number" id="cM" value="${DB.cfg.msg}"></div>
+            <div class="fg"><label>Boost Cost</label><input type="number" id="cB" value="${DB.cfg.boost}"></div>
+            <div class="fg"><label>Super Cost</label><input type="number" id="cSB" value="${DB.cfg.sboost}"></div>
+            <div class="fg"><label>Connect Cr</label><input type="number" id="cCon" value="${DB.cfg.conCr}"></div>
+            <div class="fg"><label>Plus Cr</label><input type="number" id="cPlus" value="${DB.cfg.plusCr}"></div>
+            <div class="fg"><label>Premium Cr</label><input type="number" id="cPrem" value="${DB.cfg.premCr}"></div>
+        </div><button class="bp" style="margin-top:10px" onclick="saveCfg()">Save</button></div>`;
+    }else if(t==='featured'){
+        const feat=DB.users.filter(u=>u.consentFeatured);
+        c.innerHTML=`<div class="abox"><h3>Featured Users (Consented: ${feat.length})</h3>
+            <p style="font-size:11px;margin-bottom:10px;color:rgba(255,255,255,0.6)">Only users who opted-in appear on homepage</p>
+            ${feat.map(u=>`<div class="urow"><div><b>${u.name}</b>, ${u.age} - ${u.vibes.map(v=>vi[v]).join('')}</div>
+            <button class="bsm bd" onclick="removeFeat('${u.id}')">Remove</button></div>`).join('')||'<p style="font-size:12px">No featured users yet</p>'}</div>`;
+    }else if(t==='logs'){
+        c.innerHTML=`<div class="abox"><h3>Logs</h3>${DB.logs.slice(0,30).map(l=>`<div style="font-size:10px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.05)"><b>${l.a}</b>: ${l.d} <small style="color:rgba(255,255,255,0.4)">by ${l.by}</small></div>`).join('')||'<p>No logs</p>'}</div>`;
+    }
+}
+
+function gBadge(uid){const opts=DB.badges.map(b=>b.id).join(', ');const bid=prompt('Badge ID?\\n'+opts);if(!bid)return;const u=DB.users.find(x=>x.id===uid);if(u&&!u.badges.includes(bid)){u.badges.push(bid);log('badge',u.name+'+'+bid);save();alert('Added!');rAdmin('users')}}
+function gCred(uid){const amt=parseInt(prompt('Amount?'));if(!amt)return;const u=DB.users.find(x=>x.id===uid);if(u){u.credits+=amt;log('give',u.name+'+'+amt);save();alert('Gave '+amt);rAdmin('users')}}
+function banU(uid){const u=DB.users.find(x=>x.id===uid);if(u){u.status=u.status==='banned'?'active':'banned';log(u.status,u.name);save();rAdmin('users')}}
+function mkAdmin(uid){const u=DB.users.find(x=>x.id===uid);if(u&&confirm('Make '+u.name+' admin?')){u.admin=true;log('admin',u.name);save();alert('Done!');rAdmin('users')}}
+function mkBadge(){const n=document.getElementById('nBN').value;if(!n)return alert('Enter name!');DB.badges.push({id:'c'+Date.now(),n,c:'b-custom'});log('badge_create',n);save();alert('Created!');rAdmin('badges')}
+function giveC(){const uid=document.getElementById('gU').value;const amt=parseInt(document.getElementById('gA').value);const u=DB.users.find(x=>x.id===uid);if(u&&amt){u.credits+=amt;log('give',u.name+'+'+amt);save();alert('Gave '+amt);rAdmin('credits')}}
+function giveAll(amt){if(!confirm('+'+amt+' to ALL?'))return;DB.users.forEach(u=>u.credits+=amt);log('give_all','+'+amt);save();alert('Done!');rAdmin('credits')}
+function saveCfg(){DB.cfg.daily=parseInt(document.getElementById('cD').value)||10;DB.cfg.streak=parseInt(document.getElementById('cS').value)||5;DB.cfg.msg=parseInt(document.getElementById('cM').value)||2;DB.cfg.boost=parseInt(document.getElementById('cB').value)||50;DB.cfg.sboost=parseInt(document.getElementById('cSB').value)||150;DB.cfg.conCr=parseInt(document.getElementById('cCon').value)||200;DB.cfg.plusCr=parseInt(document.getElementById('cPlus').value)||500;DB.cfg.premCr=parseInt(document.getElementById('cPrem').value)||1500;log('settings','updated');save();alert('Saved!')}
+function removeFeat(uid){const u=DB.users.find(x=>x.id===uid);if(u){u.consentFeatured=false;log('feat_remove',u.name);save();renderFeatured();rAdmin('featured')}}
+
+renderFeatured();
+upUI();
+</script>
+</body>
+</html>
