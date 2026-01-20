@@ -24,7 +24,7 @@
         .bp{background:linear-gradient(135deg,#f5576c,#8b5cf6);color:#fff}.bp:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(245,87,108,0.5)}
         .bs{background:rgba(255,255,255,0.1);color:#fff}.bs:hover{background:rgba(255,255,255,0.2)}
         .bd{background:#dc3545;color:#fff}.bg{background:#22c55e;color:#fff}.bsm{padding:5px 10px;font-size:11px}
-        .container{max-width:1100px;margin:0 auto;padding:15px}
+        .container{max-width:1200px;margin:0 auto;padding:15px}
         .hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;position:relative}
         .glow{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(245,87,108,0.15),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 4s ease-in-out infinite}
         @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.2)}}
@@ -58,8 +58,8 @@
         @keyframes cf{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
         .no-featured{color:rgba(255,255,255,0.4);font-size:14px;padding:40px;background:rgba(255,255,255,0.03);border-radius:16px;border:1px dashed rgba(255,255,255,0.1)}
         .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:1000;overflow-y:auto}
-        .mc{background:#1a1a2e;margin:15px auto;padding:20px;border-radius:16px;max-width:95%;width:480px;position:relative;border:1px solid rgba(255,255,255,0.1)}
-        .mc.wide{width:900px}
+        .mc{background:#1a1a2e;margin:15px auto;padding:20px;border-radius:16px;max-width:95%;width:550px;position:relative;border:1px solid rgba(255,255,255,0.1)}
+        .mc.wide{width:1000px}
         .close{position:absolute;right:15px;top:10px;font-size:22px;cursor:pointer}
         .fg{margin-bottom:10px}.fg label{display:block;margin-bottom:3px;font-size:11px;color:rgba(255,255,255,0.7)}
         .fg input,.fg select,.fg textarea{width:100%;padding:9px 12px;border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.05);color:#fff;font-size:12px}
@@ -73,6 +73,8 @@
         .b-founder{background:linear-gradient(135deg,#ffd700,#ff8c00);color:#000}.b-verified{background:#f5576c;color:#fff}
         .b-stoner{background:#22c55e;color:#fff}.b-artist{background:#ec4899;color:#fff}.b-gamer{background:#3b82f6;color:#fff}
         .b-nerd{background:#8b5cf6;color:#fff}.b-og{background:#f59e0b;color:#000}.b-vip{background:#ef4444;color:#fff}.b-custom{background:#14b8a6;color:#fff}
+        .b-welcome{background:#a855f7;color:#fff}.b-chatty{background:#06b6d4;color:#fff}.b-active{background:#10b981;color:#fff}
+        .b-booster{background:#f97316;color:#fff}.b-social{background:#ec4899;color:#fff}.b-streak{background:#eab308;color:#000}
         .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
         @media(max-width:700px){.g2,.g3,.fr{grid-template-columns:1fr}}
         .daily{background:linear-gradient(135deg,#ffd700,#ff8c00);border-radius:12px;padding:14px;text-align:center;color:#000;margin-bottom:12px}
@@ -88,12 +90,21 @@
         .consent-box{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:8px;padding:10px;margin:10px 0}
         .consent-box label{font-size:11px;display:flex;align-items:flex-start;gap:8px}
         .storage-info{position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.7);padding:8px 12px;border-radius:8px;font-size:10px;color:rgba(255,255,255,0.5)}
+        .gamertag-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+        .gamertag-item{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.05);padding:6px 10px;border-radius:6px;font-size:11px}
+        .gamertag-item button{padding:3px 8px;font-size:10px}
+        .achievement{display:flex;align-items:center;gap:8px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;margin-bottom:6px;font-size:11px}
+        .achievement.locked{opacity:0.4}
+        .achievement-icon{font-size:20px}
+        .progress-bar{background:rgba(255,255,255,0.1);height:8px;border-radius:4px;overflow:hidden;margin-top:4px}
+        .progress-fill{background:linear-gradient(90deg,#f5576c,#8b5cf6);height:100%;transition:width 0.3s}
+        .friend-req{background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);padding:10px;border-radius:8px;margin-bottom:8px}
     </style>
 </head>
 <body>
 <div class="bg-animate"></div>
 <div class="particles"><div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div></div>
-<div class="banner">🔥 18+ • FREE Messaging Forever • Earn Credits Daily</div>
+<div class="banner">🔥 18+ • FREE Messaging • Dating & Friends</div>
 <header>
     <div class="logo">🔥 NextFlame</div>
     <div class="nav">
@@ -101,6 +112,7 @@
         <button class="bs" id="liBtn">Sign In</button>
         <button class="bp" id="suBtn">Join Free</button>
         <button class="bs hidden" id="daBtn">Dashboard</button>
+        <button class="bs hidden" id="frBtn">👥 Friends</button>
         <button class="bp hidden" id="adBtn">🛡️Admin</button>
         <button class="bs hidden" id="loBtn">Logout</button>
     </div>
@@ -108,17 +120,17 @@
 <div id="hero"><div class="hero">
     <div class="glow"></div>
     <h1><span class="l1">Find Your Vibe.</span><span class="l2">Find Your Person.</span></h1>
-    <p class="hero-sub">The dating app for people who'd rather game, create, or chill than go to some boring bar. No judgment. Just real connections.</p>
+    <p class="hero-sub">Dating & Friends for gamers, stoners, artists & nerds. Connect, game together, or just chill. Your vibe attracts your tribe.</p>
     <div class="vibes">
         <span class="vibe v-gamer">🎮 Gamers</span><span class="vibe v-stoner">🌿 Stoners</span>
         <span class="vibe v-artist">🎨 Artists</span><span class="vibe v-nerd">🤓 Nerds</span>
     </div>
     <button class="cta" onclick="showM('suM')">Start Free Today</button>
     <div class="feats">
-        <div class="feat">💬 Free messaging</div><div class="feat">🪙 Daily credits</div><div class="feat">🔒 No data sales</div>
+        <div class="feat">💬 Free messaging</div><div class="feat">🎮 Gamertag sharing</div><div class="feat">🏆 Achievements</div><div class="feat">👥 Make friends</div>
     </div>
     <div class="stats">
-        <div><div class="stat-n">100%</div><div class="stat-l">Free to chat</div></div>
+        <div><div class="stat-n">100%</div><div class="stat-l">Free</div></div>
         <div><div class="stat-n" id="userCount">0</div><div class="stat-l">Users</div></div>
         <div><div class="stat-n">24/7</div><div class="stat-l">Support</div></div>
     </div>
@@ -136,13 +148,13 @@
         <div class="fr"><div class="fg"><label>Email</label><input type="email" id="sE" required></div><div class="fg"><label>Name</label><input id="sN" required></div></div>
         <div class="fr"><div class="fg"><label>Password</label><input type="password" id="sP" required minlength="8"></div><div class="fg"><label>DOB (18+)</label><input type="date" id="sD" required></div></div>
         <div class="fr"><div class="fg"><label>ZIP</label><input id="sZ" required pattern="[0-9]{5}"></div><div class="fg"><label>I'm a</label><select id="sG" required><option value="">-</option><option>Man</option><option>Woman</option><option>Non-binary</option></select></div></div>
-        <div class="fg"><label>Looking for</label><select id="sL" required><option value="">-</option><option>Men</option><option>Women</option><option>Everyone</option></select></div>
+        <div class="fg"><label>Looking for</label><select id="sL" required><option value="">-</option><option value="dating">💕 Dating</option><option value="friends">👥 Friends</option><option value="both">💕👥 Both</option></select></div>
         <div class="fg"><label>Vibes</label><div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px"><label><input type="checkbox" id="vG">🎮Gamer</label><label><input type="checkbox" id="vS">🌿Stoner</label><label><input type="checkbox" id="vA">🎨Artist</label><label><input type="checkbox" id="vN">🤓Nerd</label></div></div>
-        <div class="fg"><label>Bio (50+)</label><textarea id="sB" required minlength="50" rows="2"></textarea></div>
+        <div class="fg"><label>Bio (50+)</label><textarea id="sB" required minlength="50" rows="2" placeholder="Tell people about yourself, your hobbies, what you're looking for..."></textarea></div>
         <div class="fg"><label style="font-size:10px"><input type="checkbox" required> I'm 18+ and agree to Terms</label></div>
         <div class="consent-box">
             <label><input type="checkbox" id="consentFeatured"> 
-            <span><strong>Optional:</strong> I consent to being featured on the homepage.</span></label>
+            <span><strong>Optional:</strong> Feature me on homepage</span></label>
         </div>
         <button type="submit" class="bp" style="width:100%;padding:11px">Create Account (+100🪙)</button>
     </form>
@@ -164,6 +176,7 @@
     <div class="tabs" id="aT">
         <div class="tab active" data-t="users">👥Users</div>
         <div class="tab" data-t="badges">🏅Badges</div>
+        <div class="tab" data-t="achievements">🏆Achievements</div>
         <div class="tab" data-t="credits">🪙Credits</div>
         <div class="tab" data-t="settings">⚙️Settings</div>
         <div class="tab" data-t="featured">⭐Featured</div>
@@ -173,24 +186,38 @@
     <div id="aC"></div>
 </div></div>
 
+<div class="modal" id="frM"><div class="mc wide">
+    <span class="close" onclick="closeM('frM')">×</span>
+    <h2 style="margin-bottom:10px">👥 Friends</h2>
+    <div id="frContent"></div>
+</div></div>
+
 <div class="storage-info" id="storageInfo">Storage: Loading...</div>
 
 <script>
-// ============================================
-// PERSISTENT STORAGE USING CLAUDE.AI STORAGE API
-// ============================================
 const STORAGE_KEY_PREFIX = 'nextflame';
 const FE = 'tannerkurrasch@gmail.com';
 let me = null;
 
-// Storage wrapper for Claude.ai storage
+// Achievements system
+const ACHIEVEMENTS = [
+    {id:'welcome',n:'🎉 Welcome',d:'Join NextFlame',req:0,r:'signup'},
+    {id:'chatty',n:'💬 Chatty',d:'Send 10 messages',req:10,r:'msgs'},
+    {id:'social',n:'👥 Social Butterfly',d:'Make 5 friends',req:5,r:'friends'},
+    {id:'active',n:'🔥 Active User',d:'7 day login streak',req:7,r:'streak'},
+    {id:'booster',n:'⚡ Booster',d:'Use 5 boosts',req:5,r:'boosts'},
+    {id:'rich',n:'💰 Credit Master',d:'Earn 1000 credits',req:1000,r:'totalCredits'},
+    {id:'popular',n:'⭐ Popular',d:'Get 10 profile visits',req:10,r:'visits'},
+    {id:'gamer',n:'🎮 Gamer Pro',d:'Add 3 gamertags',req:3,r:'gamertags'},
+];
+
 const Storage = {
     async get(key) {
         try {
             const result = await window.storage.get(`${STORAGE_KEY_PREFIX}:${key}`);
             return result ? JSON.parse(result.value) : null;
         } catch (err) {
-            console.log(`Key ${key} not found, using default`);
+            console.log(`Key ${key} not found`);
             return null;
         }
     },
@@ -199,7 +226,7 @@ const Storage = {
             await window.storage.set(`${STORAGE_KEY_PREFIX}:${key}`, JSON.stringify(value));
             return true;
         } catch (err) {
-            console.error('Storage set error:', err);
+            console.error('Storage error:', err);
             return false;
         }
     },
@@ -207,7 +234,7 @@ const Storage = {
         try {
             await window.storage.delete(`${STORAGE_KEY_PREFIX}:${key}`);
         } catch (err) {
-            console.error('Storage delete error:', err);
+            console.error('Delete error:', err);
         }
     },
     async listKeys() {
@@ -220,37 +247,36 @@ const Storage = {
     }
 };
 
-// Initialize default data
 let DB = {
     users: [],
+    friendReqs: [],
     badges: [
-        {id:'founder',n:'👑 Founder',c:'b-founder'},
-        {id:'verified',n:'✓ Verified',c:'b-verified'},
-        {id:'stoner',n:'🌿 Stoner',c:'b-stoner'},
-        {id:'artist',n:'🎨 Artist',c:'b-artist'},
-        {id:'gamer',n:'🎮 Gamer',c:'b-gamer'},
-        {id:'nerd',n:'🤓 Nerd',c:'b-nerd'},
-        {id:'og',n:'⭐ OG',c:'b-og'},
-        {id:'vip',n:'💎 VIP',c:'b-vip'}
+        {id:'founder',n:'👑 Founder',c:'b-founder'},{id:'verified',n:'✓ Verified',c:'b-verified'},
+        {id:'stoner',n:'🌿 Stoner',c:'b-stoner'},{id:'artist',n:'🎨 Artist',c:'b-artist'},
+        {id:'gamer',n:'🎮 Gamer',c:'b-gamer'},{id:'nerd',n:'🤓 Nerd',c:'b-nerd'},
+        {id:'og',n:'⭐ OG',c:'b-og'},{id:'vip',n:'💎 VIP',c:'b-vip'},
+        {id:'welcome',n:'🎉 Welcome',c:'b-welcome'},{id:'chatty',n:'💬 Chatty',c:'b-chatty'},
+        {id:'active',n:'🔥 Active',c:'b-active'},{id:'booster',n:'⚡ Booster',c:'b-booster'},
+        {id:'social',n:'👥 Social',c:'b-social'},{id:'streak',n:'🏆 Streak Master',c:'b-streak'}
     ],
     logs: [],
-    cfg: {daily:10,streak:5,msg:2,boost:50,sboost:150,conCr:200,plusCr:500,premCr:1500}
+    cfg: {daily:10,streak:5,msg:2,boost:50,sboost:150,conCr:200,plusCr:500,premCr:1500,profileView:5,friendAdd:10,gamertagAdd:15,achievementBonus:50}
 };
 
-// Load from persistent storage
 async function loadData() {
     const users = await Storage.get('users');
+    const friendReqs = await Storage.get('friendReqs');
     const badges = await Storage.get('badges');
     const logs = await Storage.get('logs');
     const cfg = await Storage.get('config');
     const session = await Storage.get('session');
     
     if (users) DB.users = users;
+    if (friendReqs) DB.friendReqs = friendReqs;
     if (badges) DB.badges = badges;
     if (logs) DB.logs = logs;
     if (cfg) DB.cfg = cfg;
     
-    // Restore session
     if (session && session.userId) {
         me = DB.users.find(u => u.id === session.userId);
     }
@@ -260,29 +286,25 @@ async function loadData() {
     upUI();
 }
 
-// Save to persistent storage
 async function save() {
     await Storage.set('users', DB.users);
+    await Storage.set('friendReqs', DB.friendReqs);
     await Storage.set('badges', DB.badges);
-    await Storage.set('logs', DB.logs.slice(0, 100));
+    await Storage.set('logs', DB.logs.slice(0, 200));
     await Storage.set('config', DB.cfg);
     if (me) {
-        await Storage.set('session', { userId: me.id, timestamp: Date.now() });
+        await Storage.set('session', {userId: me.id, timestamp: Date.now()});
     }
     updateStorageInfo();
 }
 
-// Update storage info display
 async function updateStorageInfo() {
     const keys = await Storage.listKeys();
-    const el = document.getElementById('storageInfo');
-    el.textContent = `Storage: ${keys.length} keys`;
-    
-    const userCount = document.getElementById('userCount');
-    if (userCount) userCount.textContent = DB.users.length;
+    document.getElementById('storageInfo').textContent = `Storage: ${keys.length} keys`;
+    const uc = document.getElementById('userCount');
+    if (uc) uc.textContent = DB.users.length;
 }
 
-// Helpers
 const showM = i => document.getElementById(i).style.display = 'block';
 const closeM = i => document.getElementById(i).style.display = 'none';
 const age = d => {
@@ -291,16 +313,47 @@ const age = d => {
     return a;
 };
 const fU = e => DB.users.find(u => u.email === e);
-const log = (a, d) => { DB.logs.unshift({ t: Date.now(), a, d, by: me?.name || 'Sys' }); if (DB.logs.length > 100) DB.logs.pop(); save(); };
-const bH = ids => ids.map(id => { const b = DB.badges.find(x => x.id === id); return b ? `<span class="badge ${b.c}">${b.n}</span>` : ''; }).join('');
-const vi = { gamer: '🎮', stoner: '🌿', artist: '🎨', nerd: '🤓' };
+const log = (a, d) => {DB.logs.unshift({t: Date.now(), a, d, by: me?.name || 'Sys'}); if (DB.logs.length > 200) DB.logs.pop(); save()};
+const bH = ids => ids.map(id => {const b = DB.badges.find(x => x.id === id); return b ? `<span class="badge ${b.c}">${b.n}</span>` : ''}).join('');
+const vi = {gamer: '🎮', stoner: '🌿', artist: '🎨', nerd: '🤓'};
 
-// Render featured
+// Check & award achievements
+async function checkAchievements() {
+    if (!me) return;
+    let awarded = false;
+    
+    ACHIEVEMENTS.forEach(ach => {
+        if (me.achievements && me.achievements.includes(ach.id)) return;
+        
+        let unlocked = false;
+        if (ach.r === 'signup') unlocked = true;
+        else if (ach.r === 'msgs') unlocked = me.msgs >= ach.req;
+        else if (ach.r === 'friends') unlocked = (me.friends || []).length >= ach.req;
+        else if (ach.r === 'streak') unlocked = me.streak >= ach.req;
+        else if (ach.r === 'boosts') unlocked = (me.boostsUsed || 0) >= ach.req;
+        else if (ach.r === 'totalCredits') unlocked = (me.totalEarned || 0) >= ach.req;
+        else if (ach.r === 'visits') unlocked = (me.profileViews || 0) >= ach.req;
+        else if (ach.r === 'gamertags') unlocked = (me.gamertags || []).length >= ach.req;
+        
+        if (unlocked) {
+            if (!me.achievements) me.achievements = [];
+            me.achievements.push(ach.id);
+            if (!me.badges.includes(ach.id)) me.badges.push(ach.id);
+            me.credits += DB.cfg.achievementBonus;
+            log('achievement', `${me.name}: ${ach.n} (+${DB.cfg.achievementBonus})`);
+            awarded = true;
+            setTimeout(() => alert(`🏆 Achievement Unlocked!\n${ach.n}\n${ach.d}\n\n+${DB.cfg.achievementBonus} credits!`), 100);
+        }
+    });
+    
+    if (awarded) await save();
+}
+
 function renderFeatured() {
     const fc = document.getElementById('featuredUsers');
     const featured = DB.users.filter(u => u.consentFeatured && u.status === 'active');
     if (featured.length === 0) {
-        fc.innerHTML = `<div class="no-featured">Be the first to be featured!<br><small>When you sign up, you can opt-in to be shown here.</small></div>`;
+        fc.innerHTML = `<div class="no-featured">Be the first to be featured!<br><small>Opt-in during signup.</small></div>`;
     } else {
         fc.innerHTML = featured.slice(0, 6).map(u => `
             <div class="fcard">
@@ -313,12 +366,12 @@ function renderFeatured() {
     }
 }
 
-// Event listeners
 document.getElementById('liBtn').onclick = () => showM('liM');
 document.getElementById('suBtn').onclick = () => showM('suM');
-document.getElementById('loBtn').onclick = async () => { me = null; await Storage.delete('session'); upUI(); };
+document.getElementById('loBtn').onclick = async () => {me = null; await Storage.delete('session'); upUI()};
 document.getElementById('daBtn').onclick = () => rDash();
-document.getElementById('adBtn').onclick = () => { showM('adM'); rAdmin('users'); };
+document.getElementById('frBtn').onclick = () => {showM('frM'); rFriends()};
+document.getElementById('adBtn').onclick = () => {showM('adM'); rAdmin('users')};
 document.getElementById('aT').onclick = e => {
     if (e.target.dataset.t) {
         document.querySelectorAll('#aT .tab').forEach(x => x.classList.remove('active'));
@@ -327,7 +380,6 @@ document.getElementById('aT').onclick = e => {
     }
 };
 
-// Signup
 document.getElementById('suF').onsubmit = async e => {
     e.preventDefault();
     const em = document.getElementById('sE').value;
@@ -350,11 +402,13 @@ document.getElementById('suF').onsubmit = async e => {
         age: age(document.getElementById('sD').value),
         zip: document.getElementById('sZ').value,
         gender: document.getElementById('sG').value,
-        look: document.getElementById('sL').value,
+        lookingFor: document.getElementById('sL').value,
         vibes: v,
         bio: document.getElementById('sB').value,
-        badges: isF ? ['founder'] : [],
+        badges: isF ? ['founder', 'welcome'] : ['welcome'],
+        achievements: ['welcome'],
         credits: 100,
+        totalEarned: 100,
         streak: 0,
         lastD: null,
         sub: 'free',
@@ -364,20 +418,24 @@ document.getElementById('suF').onsubmit = async e => {
         founder: isF,
         status: 'active',
         joined: Date.now(),
-        consentFeatured: document.getElementById('consentFeatured').checked
+        consentFeatured: document.getElementById('consentFeatured').checked,
+        gamertags: [],
+        friends: [],
+        boostsUsed: 0,
+        profileViews: 0
     };
     
     DB.users.push(u);
-    log('signup', u.name + (u.consentFeatured ? ' (featured)' : ''));
+    log('signup', u.name);
     await save();
     me = u;
     closeM('suM');
-    alert('Welcome!🔥+100 credits' + (isF ? '\n👑FOUNDER ACCESS!' : '') + (u.consentFeatured ? '\n⭐Featured!' : ''));
+    alert('Welcome!🔥+100 credits\n🏆 Achievement: Welcome!' + (isF ? '\n👑FOUNDER ACCESS!' : ''));
+    await checkAchievements();
     renderFeatured();
     upUI();
 };
 
-// Login
 document.getElementById('liF').onsubmit = async e => {
     e.preventDefault();
     const u = fU(document.getElementById('lE').value);
@@ -390,7 +448,6 @@ document.getElementById('liF').onsubmit = async e => {
     upUI();
 };
 
-// Daily reward
 async function chkDaily() {
     if (!me) return;
     const td = new Date().toDateString();
@@ -399,13 +456,14 @@ async function chkDaily() {
     me.streak = me.lastD === yd ? me.streak + 1 : 1;
     const r = DB.cfg.daily + (me.streak * DB.cfg.streak);
     me.credits += r;
+    me.totalEarned = (me.totalEarned || 0) + r;
     me.lastD = td;
     log('daily', me.name + '+' + r);
     await save();
+    await checkAchievements();
     setTimeout(() => alert('🎁+' + r + ' credits!\n🔥' + me.streak + ' day streak!'), 200);
 }
 
-// Update UI
 function upUI() {
     const on = !!me;
     document.getElementById('hero').style.display = on ? 'none' : 'block';
@@ -413,6 +471,7 @@ function upUI() {
     document.getElementById('liBtn').classList.toggle('hidden', on);
     document.getElementById('suBtn').classList.toggle('hidden', on);
     document.getElementById('daBtn').classList.toggle('hidden', !on);
+    document.getElementById('frBtn').classList.toggle('hidden', !on);
     document.getElementById('loBtn').classList.toggle('hidden', !on);
     document.getElementById('cBox').classList.toggle('hidden', !on);
     document.getElementById('adBtn').classList.toggle('hidden', !on || !me?.admin);
@@ -422,32 +481,74 @@ function upUI() {
     }
 }
 
-// Dashboard
 function rDash() {
     const nx = DB.cfg.daily + ((me.streak + 1) * DB.cfg.streak);
+    const achProgress = ACHIEVEMENTS.map(a => {
+        const unlocked = me.achievements && me.achievements.includes(a.id);
+        let prog = 0;
+        if (a.r === 'msgs') prog = Math.min(100, (me.msgs / a.req) * 100);
+        else if (a.r === 'friends') prog = Math.min(100, ((me.friends || []).length / a.req) * 100);
+        else if (a.r === 'streak') prog = Math.min(100, (me.streak / a.req) * 100);
+        else if (a.r === 'boosts') prog = Math.min(100, ((me.boostsUsed || 0) / a.req) * 100);
+        else if (a.r === 'totalCredits') prog = Math.min(100, ((me.totalEarned || 0) / a.req) * 100);
+        else if (a.r === 'visits') prog = Math.min(100, ((me.profileViews || 0) / a.req) * 100);
+        else if (a.r === 'gamertags') prog = Math.min(100, ((me.gamertags || []).length / a.req) * 100);
+        else if (unlocked) prog = 100;
+        
+        return `<div class="achievement ${unlocked ? '' : 'locked'}">
+            <div class="achievement-icon">${unlocked ? '🏆' : '🔒'}</div>
+            <div style="flex:1">
+                <div><strong>${a.n}</strong> - ${a.d}</div>
+                ${!unlocked ? `<div class="progress-bar"><div class="progress-fill" style="width:${prog}%"></div></div>` : '<div style="color:#22c55e;font-size:10px">✓ Unlocked</div>'}
+            </div>
+        </div>`;
+    }).join('');
+    
     document.getElementById('app').innerHTML = `
     <div class="daily"><h3>🎁 Daily</h3><div class="streak">🔥${me.streak} Days</div><p style="font-size:11px">Tomorrow:+${nx}</p></div>
+    
     <div class="g2">
         <div class="card">
             <h3>${me.name}, ${me.age} ${bH(me.badges)}</h3>
             <p style="font-size:11px;color:rgba(255,255,255,0.6);margin:5px 0">${me.bio}</p>
             <p style="font-size:11px">📍${me.zip} ${me.vibes.map(x => vi[x]).join('')}</p>
-            <p style="font-size:11px;margin-top:4px">💬${me.msgs} • 💎${me.sub}</p>
-            <p style="font-size:10px;margin-top:8px;color:rgba(255,255,255,0.4)">
-                Featured: ${me.consentFeatured ? '✅ Yes' : '❌ No'} 
-                <button class="bsm bs" onclick="toggleFeatured()">${me.consentFeatured ? 'Opt Out' : 'Opt In'}</button>
-            </p>
+            <p style="font-size:11px;margin-top:4px">💬${me.msgs} msgs • 👥${(me.friends || []).length} friends • ${me.lookingFor === 'dating' ? '💕 Dating' : me.lookingFor === 'friends' ? '👥 Friends' : '💕👥 Both'}</p>
+            <p style="font-size:10px;margin-top:8px;color:rgba(255,255,255,0.4)">Featured: ${me.consentFeatured ? '✅' : '❌'} <button class="bsm bs" onclick="toggleFeatured()">${me.consentFeatured ? 'Opt Out' : 'Opt In'}</button></p>
         </div>
         <div class="card">
-            <h3>🪙${me.credits}</h3>
-            <p style="font-size:11px;margin:5px 0">Use for boosts</p>
+            <h3>🪙${me.credits} Credits</h3>
+            <p style="font-size:10px;margin:5px 0;color:rgba(255,255,255,0.5)">Total earned: ${me.totalEarned || 0}</p>
             <button class="bp bsm" onclick="boost()">⚡Boost(${DB.cfg.boost})</button> 
             <button class="bp bsm" onclick="sboost()">🚀Super(${DB.cfg.sboost})</button>
-            <p style="font-size:9px;margin-top:5px;color:rgba(255,255,255,0.4)">+${DB.cfg.msg}/msg</p>
+            <p style="font-size:9px;margin-top:5px;color:rgba(255,255,255,0.4)">+${DB.cfg.msg}/msg • +${DB.cfg.profileView}/visit • +${DB.cfg.friendAdd}/friend • +${DB.cfg.gamertagAdd}/tag</p>
         </div>
     </div>
+    
+    <h3 style="margin:15px 0 10px">🎮 Gamertags</h3>
+    <div class="card">
+        <div class="gamertag-list" id="gamertagList"></div>
+        <div style="display:flex;gap:6px;margin-top:10px">
+            <select id="gtPlatform" style="padding:7px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:11px">
+                <option value="">Select Platform</option>
+                <option value="Xbox">Xbox</option>
+                <option value="PlayStation">PlayStation</option>
+                <option value="Steam">Steam</option>
+                <option value="Discord">Discord</option>
+                <option value="Roblox">Roblox</option>
+                <option value="Fortnite">Fortnite</option>
+                <option value="ToonTown Rewritten">ToonTown Rewritten</option>
+            </select>
+            <input id="gtTag" placeholder="Your tag..." style="flex:1;padding:7px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:11px">
+            <button class="bp bsm" onclick="addGamertag()">Add</button>
+        </div>
+    </div>
+    
+    <h3 style="margin:15px 0 10px">🏆 Achievements (${me.achievements ? me.achievements.length : 0}/${ACHIEVEMENTS.length})</h3>
+    <div class="card">${achProgress}</div>
+    
     <button class="bs" style="margin:10px 0" onclick="tMsg()">💬Test Msg(+${DB.cfg.msg})</button>
-    <h3 style="margin:12px 0 8px">💎Subscriptions</h3>
+    
+    <h3 style="margin:15px 0 10px">💎Subscriptions</h3>
     <div class="g3">
         <div class="tier"><h3>Connect</h3><div class="tier-p">$3.99</div><div class="tier-c">+${DB.cfg.conCr}/mo</div>
             <ul class="tier-l"><li>12hr highlight</li><li>5 filters</li><li>30 receipts</li></ul>
@@ -459,82 +560,255 @@ function rDash() {
             <ul class="tier-l"><li>All Plus</li><li>Daily boosts</li><li>Priority</li></ul>
             <button class="bp bsm" onclick="sub('premium',${DB.cfg.premCr})">Get</button></div>
     </div>`;
+    
+    renderGamertags();
 }
 
-// Actions
+function renderGamertags() {
+    const list = document.getElementById('gamertagList');
+    if (!list) return;
+    
+    if (!me.gamertags || me.gamertags.length === 0) {
+        list.innerHTML = '<p style="font-size:11px;color:rgba(255,255,255,0.5)">No gamertags yet. Add one!</p>';
+    } else {
+        list.innerHTML = me.gamertags.map((gt, i) => `
+            <div class="gamertag-item">
+                <strong>${gt.platform}:</strong> ${gt.tag}
+                <button class="bd bsm" onclick="removeGamertag(${i})">×</button>
+            </div>
+        `).join('');
+    }
+}
+
+async function addGamertag() {
+    const platform = document.getElementById('gtPlatform').value;
+    const tag = document.getElementById('gtTag').value.trim();
+    
+    if (!platform || !tag) return alert('Select platform and enter tag');
+    
+    if (!me.gamertags) me.gamertags = [];
+    if (me.gamertags.length >= 10) return alert('Max 10 gamertags');
+    
+    me.gamertags.push({platform, tag});
+    me.credits += DB.cfg.gamertagAdd;
+    me.totalEarned = (me.totalEarned || 0) + DB.cfg.gamertagAdd;
+    
+    log('gamertag_add', `${me.name}: ${platform} - ${tag}`);
+    await save();
+    await checkAchievements();
+    
+    document.getElementById('gtPlatform').value = '';
+    document.getElementById('gtTag').value = '';
+    
+    alert(`🎮 Gamertag added! +${DB.cfg.gamertagAdd} credits`);
+    renderGamertags();
+    upUI();
+}
+
+async function removeGamertag(index) {
+    me.gamertags.splice(index, 1);
+    log('gamertag_remove', me.name);
+    await save();
+    renderGamertags();
+}
+
 async function toggleFeatured() {
     me.consentFeatured = !me.consentFeatured;
     log('featured_toggle', me.name + ':' + (me.consentFeatured ? 'on' : 'off'));
     await save();
     renderFeatured();
-    alert(me.consentFeatured ? 'You can now be featured!' : 'You will no longer be featured.');
+    alert(me.consentFeatured ? 'You can now be featured!' : 'No longer featured.');
     rDash();
 }
 
 async function boost() {
-    if (me.credits < DB.cfg.boost) return alert('Need credits!');
+    if (me.credits < DB.cfg.boost) return alert('Need ' + DB.cfg.boost + ' credits!');
     me.credits -= DB.cfg.boost;
+    me.boostsUsed = (me.boostsUsed || 0) + 1;
     log('boost', me.name);
     await save();
+    await checkAchievements();
     alert('⚡Boosted!');
     upUI();
 }
 
 async function sboost() {
-    if (me.credits < DB.cfg.sboost) return alert('Need credits!');
+    if (me.credits < DB.cfg.sboost) return alert('Need ' + DB.cfg.sboost + ' credits!');
     me.credits -= DB.cfg.sboost;
+    me.boostsUsed = (me.boostsUsed || 0) + 1;
     log('sboost', me.name);
     await save();
-    alert('🚀Super!');
+    await checkAchievements();
+    alert('🚀Super Boost!');
     upUI();
 }
 
 async function tMsg() {
     me.msgs++;
     me.credits += DB.cfg.msg;
+    me.totalEarned = (me.totalEarned || 0) + DB.cfg.msg;
     log('msg', me.name);
     await save();
-    alert('💬+' + DB.cfg.msg);
+    await checkAchievements();
+    alert('💬+' + DB.cfg.msg + ' credits');
     upUI();
 }
 
 async function sub(t, c) {
-    if (confirm(t + ' for +' + c + '/mo?')) {
+    if (confirm(t + ' subscription for +' + c + ' credits/mo?')) {
         me.sub = t;
         me.credits += c;
+        me.totalEarned = (me.totalEarned || 0) + c;
         log('sub', me.name + ':' + t);
         await save();
-        alert('💎' + t + '!+' + c);
+        alert('💎' + t.toUpperCase() + ' activated! +' + c + ' credits');
         upUI();
     }
 }
 
-// Admin panel
+function rFriends() {
+    const myReqs = DB.friendReqs.filter(r => r.to === me.id && r.status === 'pending');
+    const sent = DB.friendReqs.filter(r => r.from === me.id && r.status === 'pending');
+    
+    document.getElementById('frContent').innerHTML = `
+        <div class="abox">
+            <h3>Friend Requests (${myReqs.length})</h3>
+            ${myReqs.length === 0 ? '<p style="font-size:11px;color:rgba(255,255,255,0.5)">No pending requests</p>' : myReqs.map(r => {
+                const from = DB.users.find(u => u.id === r.from);
+                return `<div class="friend-req">
+                    <strong>${from?.name || 'User'}</strong>
+                    <p style="font-size:10px;margin:5px 0">${from?.bio?.substring(0, 100) || ''}...</p>
+                    <div style="margin-top:8px">
+                        <button class="bg bsm" onclick="acceptFriend('${r.id}')">✓ Accept</button>
+                        <button class="bd bsm" onclick="rejectFriend('${r.id}')">× Decline</button>
+                    </div>
+                </div>`;
+            }).join('')}
+        </div>
+        
+        <div class="abox">
+            <h3>My Friends (${(me.friends || []).length})</h3>
+            ${!me.friends || me.friends.length === 0 ? '<p style="font-size:11px;color:rgba(255,255,255,0.5)">No friends yet</p>' : me.friends.map(fid => {
+                const friend = DB.users.find(u => u.id === fid);
+                if (!friend) return '';
+                return `<div class="urow">
+                    <div><strong>${friend.name}</strong>, ${friend.age} ${friend.vibes.map(v => vi[v]).join('')}<br>
+                    <small>${friend.lookingFor === 'dating' ? '💕 Dating' : friend.lookingFor === 'friends' ? '👥 Friends' : '💕👥 Both'}</small></div>
+                    <button class="bd bsm" onclick="removeFriend('${fid}')">Remove</button>
+                </div>`;
+            }).join('')}
+        </div>
+        
+        <div class="abox">
+            <h3>Sent Requests (${sent.length})</h3>
+            ${sent.length === 0 ? '<p style="font-size:11px;color:rgba(255,255,255,0.5)">None</p>' : sent.map(r => {
+                const to = DB.users.find(u => u.id === r.to);
+                return `<div class="urow"><div>${to?.name || 'User'}</div><button class="bd bsm" onclick="cancelReq('${r.id}')">Cancel</button></div>`;
+            }).join('')}
+        </div>
+        
+        <div class="abox">
+            <h3>Discover People</h3>
+            ${DB.users.filter(u => u.id !== me.id && u.status === 'active' && !(me.friends || []).includes(u.id)).slice(0, 5).map(u => `
+                <div class="urow">
+                    <div><strong>${u.name}</strong>, ${u.age} ${u.vibes.map(v => vi[v]).join('')}<br>
+                    <small>${u.bio.substring(0, 80)}...</small></div>
+                    <button class="bp bsm" onclick="sendFriendReq('${u.id}')">Add Friend</button>
+                </div>
+            `).join('') || '<p style="font-size:11px">No users found</p>'}
+        </div>
+    `;
+}
+
+async function sendFriendReq(toId) {
+    const existing = DB.friendReqs.find(r => r.from === me.id && r.to === toId);
+    if (existing) return alert('Already sent!');
+    
+    DB.friendReqs.push({id: 'fr' + Date.now(), from: me.id, to: toId, status: 'pending', time: Date.now()});
+    log('friend_req', me.name + ' -> ' + DB.users.find(u => u.id === toId)?.name);
+    await save();
+    alert('Friend request sent!');
+    rFriends();
+}
+
+async function acceptFriend(reqId) {
+    const req = DB.friendReqs.find(r => r.id === reqId);
+    if (!req) return;
+    
+    req.status = 'accepted';
+    if (!me.friends) me.friends = [];
+    me.friends.push(req.from);
+    
+    const other = DB.users.find(u => u.id === req.from);
+    if (other) {
+        if (!other.friends) other.friends = [];
+        other.friends.push(me.id);
+    }
+    
+    me.credits += DB.cfg.friendAdd;
+    me.totalEarned = (me.totalEarned || 0) + DB.cfg.friendAdd;
+    
+    log('friend_accept', me.name + ' + ' + other?.name);
+    await save();
+    await checkAchievements();
+    
+    alert(`Friend added! +${DB.cfg.friendAdd} credits`);
+    rFriends();
+    upUI();
+}
+
+async function rejectFriend(reqId) {
+    const req = DB.friendReqs.find(r => r.id === reqId);
+    if (req) req.status = 'rejected';
+    await save();
+    rFriends();
+}
+
+async function cancelReq(reqId) {
+    DB.friendReqs = DB.friendReqs.filter(r => r.id !== reqId);
+    await save();
+    rFriends();
+}
+
+async function removeFriend(fid) {
+    if (!confirm('Remove this friend?')) return;
+    me.friends = me.friends.filter(id => id !== fid);
+    const other = DB.users.find(u => u.id === fid);
+    if (other && other.friends) other.friends = other.friends.filter(id => id !== me.id);
+    await save();
+    rFriends();
+}
+
 function rAdmin(t) {
     const c = document.getElementById('aC');
     if (t === 'users') {
         c.innerHTML = `<div class="abox"><h3>Users(${DB.users.length})</h3>${DB.users.map(u => `<div class="urow">
             <div><b>${u.name}</b> ${bH(u.badges)} <span class="st-${u.status === 'active' ? 'a' : 'b'}">[${u.status}]</span> ${u.consentFeatured ? '⭐' : ''}<br>
-            <small>${u.email}•🪙${u.credits}•${u.sub}</small></div>
+            <small>${u.email}•🪙${u.credits}•${u.sub}•👥${(u.friends || []).length}</small></div>
             <div>
                 <button class="bsm bg" onclick="gBadge('${u.id}')">+Badge</button>
                 <button class="bsm bs" onclick="gCred('${u.id}')">+Cred</button>
                 <button class="bsm bd" onclick="banU('${u.id}')">${u.status === 'banned' ? 'Unban' : 'Ban'}</button>
                 ${!u.admin ? `<button class="bsm bp" onclick="mkAdmin('${u.id}')">Admin</button>` : ''}
-            </div></div>`).join('') || '<p>No users yet</p>'}</div>`;
+            </div></div>`).join('') || '<p>No users</p>'}</div>`;
     } else if (t === 'badges') {
         c.innerHTML = `<div class="abox"><h3>Badges</h3><p style="margin-bottom:10px">${DB.badges.map(b => `<span class="badge ${b.c}">${b.n}</span>`).join(' ')}</p>
-            <h4 style="margin:10px 0 8px;font-size:12px">Create New Badge</h4>
-            <div style="display:flex;gap:6px;flex-wrap:wrap">
-                <input id="nBN" placeholder="e.g. 🏆 Champion" style="flex:1;min-width:150px;padding:7px;border-radius:5px;background:rgba(0,0,0,0.3);color:#fff;border:1px solid rgba(255,255,255,0.2)">
-                <button class="bp" onclick="mkBadge()">Create</button>
-            </div></div>`;
+            <h4 style="margin:10px 0 8px;font-size:12px">Create Badge</h4>
+            <div style="display:flex;gap:6px"><input id="nBN" placeholder="🏆 Name" style="flex:1;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px;border:1px solid rgba(255,255,255,0.2)">
+            <button class="bp" onclick="mkBadge()">Create</button></div></div>`;
+    } else if (t === 'achievements') {
+        c.innerHTML = `<div class="abox"><h3>Achievements</h3>${ACHIEVEMENTS.map(a => `<div class="achievement">
+            <div class="achievement-icon">🏆</div>
+            <div style="flex:1"><strong>${a.n}</strong> - ${a.d}<br><small style="color:rgba(255,255,255,0.5)">Req: ${a.req} ${a.r}</small></div>
+        </div>`).join('')}</div>
+        <div class="abox"><h3>Settings</h3>
+            <div class="fg"><label>Achievement Bonus</label><input type="number" id="achBonus" value="${DB.cfg.achievementBonus}"></div>
+            <button class="bp" onclick="saveAchCfg()">Save</button>
+        </div>`;
     } else if (t === 'credits') {
         c.innerHTML = `<div class="abox"><h3>Give Credits</h3>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-                <select id="gU" style="flex:1;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px">
-                    ${DB.users.map(u => `<option value="${u.id}">${u.name}(${u.credits})</option>`).join('')}
-                </select>
+            <div style="display:flex;gap:6px;margin-bottom:10px">
+                <select id="gU" style="flex:1;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px">${DB.users.map(u => `<option value="${u.id}">${u.name}(${u.credits})</option>`).join('')}</select>
                 <input type="number" id="gA" value="100" style="width:80px;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px">
                 <button class="bg" onclick="giveC()">Give</button>
             </div>
@@ -543,22 +817,26 @@ function rAdmin(t) {
             <button class="bs bsm" onclick="giveAll(500)">+500 All</button>
         </div>`;
     } else if (t === 'settings') {
-        c.innerHTML = `<div class="abox"><h3>Settings</h3><div class="g2">
+        c.innerHTML = `<div class="abox"><h3>Credit Rewards</h3><div class="g2">
             <div class="fg"><label>Daily Base</label><input type="number" id="cD" value="${DB.cfg.daily}"></div>
             <div class="fg"><label>Streak Bonus</label><input type="number" id="cS" value="${DB.cfg.streak}"></div>
-            <div class="fg"><label>Msg Reward</label><input type="number" id="cM" value="${DB.cfg.msg}"></div>
+            <div class="fg"><label>Message Reward</label><input type="number" id="cM" value="${DB.cfg.msg}"></div>
+            <div class="fg"><label>Profile View</label><input type="number" id="cPV" value="${DB.cfg.profileView}"></div>
+            <div class="fg"><label>Friend Add</label><input type="number" id="cFA" value="${DB.cfg.friendAdd}"></div>
+            <div class="fg"><label>Gamertag Add</label><input type="number" id="cGT" value="${DB.cfg.gamertagAdd}"></div>
+            <div class="fg"><label>Achievement Bonus</label><input type="number" id="cAch" value="${DB.cfg.achievementBonus}"></div>
             <div class="fg"><label>Boost Cost</label><input type="number" id="cB" value="${DB.cfg.boost}"></div>
-            <div class="fg"><label>Super Cost</label><input type="number" id="cSB" value="${DB.cfg.sboost}"></div>
-            <div class="fg"><label>Connect Cr</label><input type="number" id="cCon" value="${DB.cfg.conCr}"></div>
-            <div class="fg"><label>Plus Cr</label><input type="number" id="cPlus" value="${DB.cfg.plusCr}"></div>
-            <div class="fg"><label>Premium Cr</label><input type="number" id="cPrem" value="${DB.cfg.premCr}"></div>
-        </div><button class="bp" style="margin-top:10px" onclick="saveCfg()">Save</button></div>`;
+            <div class="fg"><label>Super Boost Cost</label><input type="number" id="cSB" value="${DB.cfg.sboost}"></div>
+            <div class="fg"><label>Connect Credits</label><input type="number" id="cCon" value="${DB.cfg.conCr}"></div>
+            <div class="fg"><label>Plus Credits</label><input type="number" id="cPlus" value="${DB.cfg.plusCr}"></div>
+            <div class="fg"><label>Premium Credits</label><input type="number" id="cPrem" value="${DB.cfg.premCr}"></div>
+        </div><button class="bp" style="margin-top:10px" onclick="saveCfg()">Save Settings</button></div>`;
     } else if (t === 'featured') {
         const feat = DB.users.filter(u => u.consentFeatured);
         c.innerHTML = `<div class="abox"><h3>Featured Users (${feat.length})</h3>
             <p style="font-size:11px;margin-bottom:10px;color:rgba(255,255,255,0.6)">Only users who opted-in</p>
             ${feat.map(u => `<div class="urow"><div><b>${u.name}</b>, ${u.age} - ${u.vibes.map(v => vi[v]).join('')}</div>
-            <button class="bsm bd" onclick="removeFeat('${u.id}')">Remove</button></div>`).join('') || '<p style="font-size:12px">No featured users</p>'}</div>`;
+            <button class="bsm bd" onclick="removeFeat('${u.id}')">Remove</button></div>`).join('') || '<p style="font-size:12px">None</p>'}</div>`;
     } else if (t === 'storage') {
         Storage.listKeys().then(keys => {
             c.innerHTML = `<div class="abox"><h3>Storage Management</h3>
@@ -570,11 +848,10 @@ function rAdmin(t) {
             </div>`;
         });
     } else if (t === 'logs') {
-        c.innerHTML = `<div class="abox"><h3>Logs</h3>${DB.logs.slice(0, 50).map(l => `<div style="font-size:10px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.05)"><b>${l.a}</b>: ${l.d} <small style="color:rgba(255,255,255,0.4)">by ${l.by}</small></div>`).join('') || '<p>No logs</p>'}</div>`;
+        c.innerHTML = `<div class="abox"><h3>Activity Logs (${DB.logs.length})</h3>${DB.logs.slice(0, 50).map(l => `<div style="font-size:10px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.05)"><b>${l.a}</b>: ${l.d} <small style="color:rgba(255,255,255,0.4)">by ${l.by}</small></div>`).join('') || '<p>No logs</p>'}</div>`;
     }
 }
 
-// Admin actions
 async function gBadge(uid) {
     const opts = DB.badges.map(b => b.id).join(', ');
     const bid = prompt('Badge ID?\n' + opts);
@@ -584,7 +861,7 @@ async function gBadge(uid) {
         u.badges.push(bid);
         log('badge', u.name + '+' + bid);
         await save();
-        alert('Added!');
+        alert('Badge added!');
         rAdmin('users');
     }
 }
@@ -595,6 +872,7 @@ async function gCred(uid) {
     const u = DB.users.find(x => x.id === uid);
     if (u) {
         u.credits += amt;
+        u.totalEarned = (u.totalEarned || 0) + amt;
         log('give', u.name + '+' + amt);
         await save();
         alert('Gave ' + amt);
@@ -618,7 +896,7 @@ async function mkAdmin(uid) {
         u.admin = true;
         log('admin', u.name);
         await save();
-        alert('Done!');
+        alert('Admin granted!');
         rAdmin('users');
     }
 }
@@ -626,10 +904,10 @@ async function mkAdmin(uid) {
 async function mkBadge() {
     const n = document.getElementById('nBN').value;
     if (!n) return alert('Enter name!');
-    DB.badges.push({ id: 'c' + Date.now(), n, c: 'b-custom' });
+    DB.badges.push({id: 'c' + Date.now(), n, c: 'b-custom'});
     log('badge_create', n);
     await save();
-    alert('Created!');
+    alert('Badge created!');
     rAdmin('badges');
 }
 
@@ -639,6 +917,7 @@ async function giveC() {
     const u = DB.users.find(x => x.id === uid);
     if (u && amt) {
         u.credits += amt;
+        u.totalEarned = (u.totalEarned || 0) + amt;
         log('give', u.name + '+' + amt);
         await save();
         alert('Gave ' + amt);
@@ -647,18 +926,32 @@ async function giveC() {
 }
 
 async function giveAll(amt) {
-    if (!confirm('+' + amt + ' to ALL?')) return;
-    DB.users.forEach(u => u.credits += amt);
+    if (!confirm('+' + amt + ' to ALL users?')) return;
+    DB.users.forEach(u => {
+        u.credits += amt;
+        u.totalEarned = (u.totalEarned || 0) + amt;
+    });
     log('give_all', '+' + amt);
     await save();
-    alert('Done!');
+    alert('Done! +' + amt + ' to everyone');
     rAdmin('credits');
+}
+
+async function saveAchCfg() {
+    DB.cfg.achievementBonus = parseInt(document.getElementById('achBonus').value) || 50;
+    log('settings', 'achievement updated');
+    await save();
+    alert('Saved!');
 }
 
 async function saveCfg() {
     DB.cfg.daily = parseInt(document.getElementById('cD').value) || 10;
     DB.cfg.streak = parseInt(document.getElementById('cS').value) || 5;
     DB.cfg.msg = parseInt(document.getElementById('cM').value) || 2;
+    DB.cfg.profileView = parseInt(document.getElementById('cPV').value) || 5;
+    DB.cfg.friendAdd = parseInt(document.getElementById('cFA').value) || 10;
+    DB.cfg.gamertagAdd = parseInt(document.getElementById('cGT').value) || 15;
+    DB.cfg.achievementBonus = parseInt(document.getElementById('cAch').value) || 50;
     DB.cfg.boost = parseInt(document.getElementById('cB').value) || 50;
     DB.cfg.sboost = parseInt(document.getElementById('cSB').value) || 150;
     DB.cfg.conCr = parseInt(document.getElementById('cCon').value) || 200;
@@ -666,7 +959,7 @@ async function saveCfg() {
     DB.cfg.premCr = parseInt(document.getElementById('cPrem').value) || 1500;
     log('settings', 'updated');
     await save();
-    alert('Saved!');
+    alert('Settings saved!');
 }
 
 async function removeFeat(uid) {
@@ -682,21 +975,20 @@ async function removeFeat(uid) {
 
 async function clearStorage() {
     if (!confirm('⚠️ DELETE ALL DATA? This cannot be undone!')) return;
-    if (!confirm('Are you SURE? All users, logs, and settings will be permanently deleted!')) return;
+    if (!confirm('Are you ABSOLUTELY SURE? All users, logs, and settings will be permanently deleted!')) return;
     
     const keys = await Storage.listKeys();
     for (const key of keys) {
         await Storage.delete(key.replace(`${STORAGE_KEY_PREFIX}:`, ''));
     }
     
-    DB = { users: [], badges: DB.badges, logs: [], cfg: DB.cfg };
+    DB = {users: [], friendReqs: [], badges: DB.badges, logs: [], cfg: DB.cfg};
     me = null;
     await save();
     alert('All data cleared!');
     location.reload();
 }
 
-// Initialize on load
 loadData();
 </script>
 </body>
