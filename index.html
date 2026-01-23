@@ -6,848 +6,278 @@
     <title>NextFlame - Find Your Vibe</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, sans-serif; background: #0a0a0f; min-height: 100vh; color: #fff; overflow-x: hidden; }
-        .bg-animate { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(125deg, #0a0a0f, #1a0a20, #0f1a2a, #1a0a20, #0a0a0f); background-size: 400% 400%; animation: grad 15s ease infinite; }
-        @keyframes grad { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-        .p { position: absolute; width: 4px; height: 4px; background: #f5576c; border-radius: 50%; opacity: 0.3; animation: fl 20s infinite; }
-        .p:nth-child(2) { left: 20%; animation-delay: 2s; background: #8b5cf6; }
-        .p:nth-child(3) { left: 40%; animation-delay: 4s; background: #22c55e; }
-        .p:nth-child(4) { left: 60%; animation-delay: 6s; background: #ffd700; }
-        .p:nth-child(5) { left: 80%; animation-delay: 8s; background: #ec4899; }
-        @keyframes fl { 0% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.3; } 100% { transform: translateY(-100vh); opacity: 0; } }
-        .banner { background: linear-gradient(90deg, #f5576c, #8b5cf6, #f5576c); background-size: 200%; animation: sh 3s linear infinite; padding: 8px; text-align: center; font-size: 11px; font-weight: 600; }
-        @keyframes sh { 0% { background-position: 200%; } 100% { background-position: -200%; } }
-        header { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(20px); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #f5576c, #ff8c42); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
-        .nav { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-        .cred-box { background: linear-gradient(135deg, #ffd700, #ff8c00); padding: 6px 12px; border-radius: 15px; font-weight: bold; color: #000; font-size: 12px; }
-        button { padding: 8px 18px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; }
-        .bp { background: linear-gradient(135deg, #f5576c, #8b5cf6); color: #fff; }
-        .bp:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(245, 87, 108, 0.5); }
-        .bs { background: rgba(255, 255, 255, 0.1); color: #fff; }
-        .bs:hover { background: rgba(255, 255, 255, 0.2); }
-        .bd { background: #dc3545; color: #fff; }
-        .bg { background: #22c55e; color: #fff; }
-        .bsm { padding: 5px 10px; font-size: 11px; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
-        .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 20px; position: relative; }
-        .glow { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(245, 87, 108, 0.15), transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: pulse 4s ease-in-out infinite; }
-        @keyframes pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.2); } }
-        .hero h1 { font-size: clamp(32px, 8vw, 64px); margin-bottom: 10px; }
-        .hero h1 .l1 { display: block; color: #fff; }
-        .hero h1 .l2 { display: block; background: linear-gradient(135deg, #f5576c, #ff8c42, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: tg 3s ease infinite; background-size: 200%; }
-        @keyframes tg { 0%, 100% { background-position: 0%; } 50% { background-position: 100%; } }
-        .hero-sub { font-size: clamp(14px, 3vw, 20px); color: rgba(255, 255, 255, 0.7); margin: 20px 0 30px; max-width: 550px; }
-        .vibes { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 25px 0; }
-        .vibe { background: rgba(255, 255, 255, 0.05); padding: 10px 22px; border-radius: 30px; font-size: 14px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s; }
-        .vibe:hover { transform: translateY(-3px); }
-        .v-gamer:hover { background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; }
-        .v-stoner:hover { background: rgba(34, 197, 94, 0.2); border-color: #22c55e; }
-        .v-artist:hover { background: rgba(236, 72, 153, 0.2); border-color: #ec4899; }
-        .v-nerd:hover { background: rgba(139, 92, 246, 0.2); border-color: #8b5cf6; }
-        .cta { padding: 16px 45px; font-size: 17px; border-radius: 30px; background: linear-gradient(135deg, #f5576c, #8b5cf6); box-shadow: 0 5px 25px rgba(245, 87, 108, 0.4); position: relative; overflow: hidden; }
-        .cta::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: 0.5s; }
-        .cta:hover::before { left: 100%; }
-        .feats { display: flex; gap: 25px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
-        .feat { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255, 255, 255, 0.6); }
-        .stats { display: flex; justify-content: center; gap: 35px; margin-top: 50px; flex-wrap: wrap; }
-        .stat-n { font-size: 32px; font-weight: bold; background: linear-gradient(135deg, #ffd700, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stat-l { font-size: 11px; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; }
-        .featured { margin-top: 60px; text-align: center; }
-        .featured h3 { font-size: 18px; margin-bottom: 20px; color: rgba(255, 255, 255, 0.6); }
-        .featured-cards { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .fcard { width: 160px; height: 220px; background: rgba(255, 255, 255, 0.05); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; transition: all 0.4s; position: relative; text-align: center; padding-top: 25px; }
-        .fcard:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); }
-        .fcard .av { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0 auto 10px; border: 2px solid rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; font-size: 24px; }
-        .fcard .nm { font-weight: bold; font-size: 14px; }
-        .fcard .ag { color: rgba(255, 255, 255, 0.5); font-size: 11px; }
-        .fcard .vi { margin-top: 8px; font-size: 16px; }
-        .fcard:nth-child(1) { animation: cf 4s ease-in-out infinite; }
-        .fcard:nth-child(2) { animation: cf 4s ease-in-out infinite 0.3s; }
-        .fcard:nth-child(3) { animation: cf 4s ease-in-out infinite 0.6s; }
-        @keyframes cf { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 1000; overflow-y: auto; }
-        .mc { background: #1a1a2e; margin: 15px auto; padding: 20px; border-radius: 16px; max-width: 95%; width: 550px; position: relative; border: 1px solid rgba(255, 255, 255, 0.1); }
-        .mc.wide { width: 1000px; }
-        .close { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; }
-        .fg { margin-bottom: 10px; }
-        .fg label { display: block; margin-bottom: 3px; font-size: 11px; color: rgba(255, 255, 255, 0.7); }
-        .fg input, .fg select, .fg textarea { width: 100%; padding: 9px 12px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: #fff; font-size: 12px; }
-        .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: #f5576c; }
-        .fr { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .tabs { display: flex; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 12px; overflow-x: auto; }
-        .tab { padding: 8px 14px; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; color: rgba(255, 255, 255, 0.5); font-size: 12px; }
-        .tab.active { border-color: #f5576c; color: #fff; }
-        .card { background: rgba(255, 255, 255, 0.03); border-radius: 12px; padding: 14px; margin-bottom: 10px; }
-        .badge { display: inline-block; padding: 2px 7px; border-radius: 6px; font-size: 9px; font-weight: bold; margin: 1px; }
-        .b-founder { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; }
-        .b-verified { background: #f5576c; color: #fff; }
-        .b-stoner { background: #22c55e; color: #fff; }
-        .b-artist { background: #ec4899; color: #fff; }
-        .b-gamer { background: #3b82f6; color: #fff; }
-        .b-nerd { background: #8b5cf6; color: #fff; }
-        .b-og { background: #f59e0b; color: #000; }
-        .b-vip { background: #ef4444; color: #fff; }
-        .b-custom { background: #14b8a6; color: #fff; }
-        .b-welcome { background: #a855f7; color: #fff; }
-        .b-chatty { background: #06b6d4; color: #fff; }
-        .b-active { background: #10b981; color: #fff; }
-        .b-booster { background: #f97316; color: #fff; }
-        .b-social { background: #ec4899; color: #fff; }
-        .b-streak { background: #eab308; color: #000; }
-        .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        @media(max-width: 700px) { .g2, .g3, .fr { grid-template-columns: 1fr; } }
-        .daily { background: linear-gradient(135deg, #ffd700, #ff8c00); border-radius: 12px; padding: 14px; text-align: center; color: #000; margin-bottom: 12px; }
-        .streak { font-size: 26px; font-weight: bold; }
-        .hidden { display: none; }
-        .post { background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 16px; margin-bottom: 15px; }
-        .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-        .post-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .post-actions { display: flex; gap: 15px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 10px; }
-        .post-action { cursor: pointer; font-size: 13px; color: rgba(255, 255, 255, 0.6); }
-        .post-action:hover { color: #f5576c; }
-        .comment { background: rgba(0, 0, 0, 0.2); padding: 10px; border-radius: 8px; margin: 8px 0; font-size: 12px; }
-        .tier { background: rgba(255, 255, 255, 0.03); border-radius: 12px; padding: 14px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s; }
-        .tier:hover { border-color: #f5576c; transform: translateY(-3px); }
-        .tier h3 { color: #f5576c; font-size: 14px; }
-        .tier-p { font-size: 26px; font-weight: bold; margin: 6px 0; }
-        .tier-c { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; padding: 4px 10px; border-radius: 10px; font-size: 10px; font-weight: bold; display: inline-block; margin: 6px 0; }
-        .tier-l { list-style: none; text-align: left; margin: 10px 0; font-size: 10px; }
-        .tier-l li { padding: 4px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .tier-l li::before { content: "✓ "; color: #22c55e; }
-        .achievement { display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255, 255, 255, 0.03); border-radius: 8px; margin-bottom: 8px; font-size: 12px; }
-        .achievement.locked { opacity: 0.4; }
-        .achievement-icon { font-size: 24px; }
-        .progress-bar { background: rgba(255, 255, 255, 0.1); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 5px; }
-        .progress-fill { background: linear-gradient(90deg, #f5576c, #8b5cf6); height: 100%; transition: width 0.3s; }
-        .gamertag-item { display: flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.05); padding: 8px 12px; border-radius: 8px; margin-bottom: 8px; font-size: 12px; }
-        .friend-card { background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-        .friend-req { background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); padding: 12px; border-radius: 8px; margin-bottom: 10px; }
-        .consent-box { background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 10px; margin: 10px 0; }
-        .consent-box label { font-size: 11px; display: flex; align-items: flex-start; gap: 8px; }
-        .oauth-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.05); color: #fff; cursor: pointer; margin: 8px 0; font-size: 13px; transition: all 0.3s; }
-        .oauth-btn:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
-        .divider { display: flex; align-items: center; margin: 15px 0; color: rgba(255, 255, 255, 0.4); font-size: 11px; }
-        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .divider span { padding: 0 10px; }
-        .urow { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: rgba(255, 255, 255, 0.03); border-radius: 6px; margin-bottom: 5px; flex-wrap: wrap; gap: 6px; font-size: 11px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #18191a; color: #e4e6eb; line-height: 1.5; }
+        
+        /* Landing Page */
+        .landing { min-height: 100vh; background: linear-gradient(125deg, #0a0a0f, #1a0a20, #0f1a2a, #1a0a20, #0a0a0f); background-size: 400% 400%; animation: grad 15s ease infinite; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        @keyframes grad { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .landing-content { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .landing-logo { font-size: 64px; font-weight: bold; background: linear-gradient(135deg, #f5576c, #ff8c42, #ffd700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        .landing-tagline { font-size: 28px; color: rgba(255, 255, 255, 0.9); line-height: 1.4; }
+        .landing-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 40px; }
+        .landing-card h2 { font-size: 32px; margin-bottom: 10px; background: linear-gradient(135deg, #f5576c, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .landing-btn { width: 100%; padding: 16px; font-size: 18px; font-weight: 600; border: none; border-radius: 8px; background: linear-gradient(135deg, #f5576c, #8b5cf6); color: white; cursor: pointer; transition: transform 0.2s; }
+        .landing-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(245, 87, 108, 0.5); }
+        .landing-features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+        .landing-feature { padding: 12px; background: rgba(255, 255, 255, 0.03); border-radius: 8px; text-align: center; font-size: 14px; }
+        
+        /* Facebook Layout */
+        .fb-layout { min-height: 100vh; }
+        .hidden { display: none !important; }
+        
+        /* Top Nav */
+        .fb-topnav { position: fixed; top: 0; left: 0; right: 0; height: 56px; background: rgba(26, 10, 32, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(245, 87, 108, 0.2); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; z-index: 1000; }
+        .fb-topnav-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .fb-logo { font-size: 28px; font-weight: bold; background: linear-gradient(135deg, #f5576c, #ff8c42); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+        .fb-search input { width: 240px; padding: 10px 12px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; color: #e4e6eb; font-size: 14px; }
+        .fb-topnav-center { display: flex; gap: 8px; }
+        .fb-nav-icon { position: relative; width: 112px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; transition: background 0.2s; }
+        .fb-nav-icon:hover { background: rgba(255, 255, 255, 0.1); }
+        .fb-nav-icon.active { border-bottom: 3px solid #f5576c; }
+        .fb-nav-icon span { font-size: 24px; }
+        .fb-badge { position: absolute; top: 8px; right: 8px; background: #f5576c; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; }
+        .fb-topnav-right { display: flex; align-items: center; gap: 12px; flex: 1; justify-content: flex-end; }
+        .fb-credits { background: linear-gradient(135deg, #ffd700, #ff8c00); padding: 6px 14px; border-radius: 16px; font-weight: 600; color: #000; font-size: 14px; }
+        .fb-profile-menu { position: relative; }
+        .fb-profile-menu:hover .fb-dropdown { display: block; }
+        .fb-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; cursor: pointer; border: 2px solid rgba(245, 87, 108, 0.5); }
+        .fb-dropdown { display: none; position: absolute; top: 50px; right: 0; background: rgba(36, 37, 38, 0.98); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; min-width: 200px; z-index: 1001; }
+        .fb-dropdown-item { padding: 12px 16px; cursor: pointer; transition: background 0.2s; font-size: 14px; }
+        .fb-dropdown-item:hover { background: rgba(255, 255, 255, 0.1); }
+        
+        /* Main Layout */
+        .fb-main { display: flex; padding-top: 56px; }
+        
+        /* Left Sidebar */
+        .fb-sidebar-left { position: fixed; left: 0; top: 56px; width: 280px; height: calc(100vh - 56px); overflow-y: auto; padding: 12px 8px; background: #18191a; border-right: 1px solid rgba(255, 255, 255, 0.05); }
+        .fb-sidebar-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background 0.2s; font-size: 15px; font-weight: 500; }
+        .fb-sidebar-item:hover { background: rgba(255, 255, 255, 0.1); }
+        .fb-sidebar-icon { font-size: 24px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.05); border-radius: 50%; }
+        
+        /* Center Content */
+        .fb-content { flex: 1; max-width: 680px; margin: 0 auto; padding: 20px 16px; margin-left: 280px; margin-right: 360px; }
+        
+        /* Right Sidebar */
+        .fb-sidebar-right { position: fixed; right: 0; top: 56px; width: 360px; height: calc(100vh - 56px); overflow-y: auto; padding: 20px 16px; background: #18191a; border-left: 1px solid rgba(255, 255, 255, 0.05); }
+        .fb-widget { background: rgba(255, 255, 255, 0.03); border-radius: 8px; padding: 16px; margin-bottom: 16px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .fb-widget h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .fb-friend-suggestion { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .fb-avatar-sm { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: bold; }
+        .fb-friend-name { font-size: 14px; font-weight: 600; flex: 1; }
+        
+        /* Cards */
+        .fb-card { background: rgba(255, 255, 255, 0.03); border-radius: 8px; padding: 16px; margin-bottom: 16px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Post Composer */
+        .fb-composer-top { display: flex; gap: 12px; margin-bottom: 12px; }
+        .fb-composer-input { flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 12px 16px; color: #e4e6eb; font-size: 15px; resize: none; min-height: 40px; }
+        .fb-composer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        /* Posts */
+        .fb-post { padding: 12px 16px; }
+        .fb-post-header { display: flex; gap: 12px; margin-bottom: 12px; }
+        .fb-post-author { font-size: 15px; font-weight: 600; }
+        .fb-post-time { font-size: 13px; color: rgba(255, 255, 255, 0.5); }
+        .fb-post-content { font-size: 15px; margin-bottom: 12px; }
+        .fb-post-stats { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; color: rgba(255, 255, 255, 0.5); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .fb-post-actions { display: flex; padding: 4px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .fb-post-action { flex: 1; padding: 8px; background: none; border: none; color: rgba(255, 255, 255, 0.7); font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 4px; }
+        .fb-post-action:hover { background: rgba(255, 255, 255, 0.1); }
+        .fb-post-action.active { color: #f5576c; }
+        
+        /* Comments */
+        .fb-comment { display: flex; gap: 8px; margin: 12px 0; }
+        .fb-comment-content { flex: 1; background: rgba(255, 255, 255, 0.05); border-radius: 18px; padding: 8px 12px; }
+        .fb-comment-author { font-size: 13px; font-weight: 600; }
+        .fb-comment-text { font-size: 14px; }
+        .fb-comment-input { flex: 1; padding: 8px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 18px; color: #e4e6eb; }
+        
+        /* Profile */
+        .fb-cover { height: 320px; background: linear-gradient(125deg, #1a0a20, #0f1a2a, #1a0a20); position: relative; }
+        .fb-profile-avatar { position: absolute; top: -80px; left: 32px; width: 168px; height: 168px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 64px; border: 4px solid #18191a; }
+        .fb-profile-header { position: relative; padding: 0 32px 16px; background: rgba(255, 255, 255, 0.03); }
+        .fb-profile-info { padding-top: 100px; }
+        .fb-profile-tabs { display: flex; padding: 0 32px; background: rgba(255, 255, 255, 0.03); }
+        .fb-profile-tab { padding: 16px 20px; font-size: 15px; font-weight: 600; cursor: pointer; color: rgba(255, 255, 255, 0.6); border-bottom: 3px solid transparent; }
+        .fb-profile-tab.active { color: #f5576c; border-bottom-color: #f5576c; }
+        
+        /* Buttons */
+        .fb-btn-primary { padding: 8px 16px; background: linear-gradient(135deg, #f5576c, #8b5cf6); color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .fb-btn-primary:hover { transform: translateY(-1px); }
+        .fb-btn-secondary { padding: 8px 16px; background: rgba(255, 255, 255, 0.1); color: #e4e6eb; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 6px; font-size: 14px; cursor: pointer; }
+        
+        /* Modal */
+        .modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center; z-index: 2000; }
+        .modal-content { background: rgba(36, 37, 38, 0.98); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 32px; max-width: 500px; width: 90%; position: relative; }
+        .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: rgba(255, 255, 255, 0.7); font-size: 32px; cursor: pointer; }
+        .modal-content h2 { font-size: 24px; margin-bottom: 24px; text-align: center; }
+        .modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: 10px 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; color: #e4e6eb; font-size: 14px; margin-bottom: 12px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        
+        /* Responsive */
+        @media (max-width: 1280px) { .fb-sidebar-right { display: none; } .fb-content { margin-right: 0; } }
+        @media (max-width: 900px) { .fb-sidebar-left { display: none; } .fb-content { margin-left: 0; } .landing-content { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-<div class="bg-animate"></div>
-<div class="particles">
-    <div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div><div class="p"></div>
-</div>
 
-<div class="banner">🔥 18+ • FREE Messaging • Dating & Friends</div>
-
-<header>
-    <div class="logo" onclick="goHome()">🔥 NextFlame</div>
-    <div class="nav">
-        <div class="cred-box hidden" id="cBox">🪙 <span id="cNum">0</span></div>
-        <button class="bs" id="liBtn" onclick="showM('liM')">Sign In</button>
-        <button class="bp" id="suBtn" onclick="showM('suM')">Join Free</button>
-        <button class="bs hidden" id="daBtn" onclick="showView('dashboard')">Dashboard</button>
-        <button class="bs hidden" id="feBtn" onclick="showView('feed')">📱 Feed</button>
-        <button class="bs hidden" id="frBtn" onclick="showView('friends')">👥 Friends</button>
-        <button class="bp hidden" id="adBtn" onclick="showView('admin')">🛡️Admin</button>
-        <button class="bs hidden" id="loBtn" onclick="logout()">Logout</button>
-    </div>
-</header>
-
-<div id="hero"><div class="hero">
-    <div class="glow"></div>
-    <h1><span class="l1">Find Your Vibe.</span><span class="l2">Find Your Person.</span></h1>
-    <p class="hero-sub">Dating & Friends for gamers, stoners, artists & nerds. Connect, game together, or just chill. Your vibe attracts your tribe.</p>
-    <div class="vibes">
-        <span class="vibe v-gamer">🎮 Gamers</span><span class="vibe v-stoner">🌿 Stoners</span>
-        <span class="vibe v-artist">🎨 Artists</span><span class="vibe v-nerd">🤓 Nerds</span>
-    </div>
-    <button class="cta" onclick="showM('suM')">Start Free Today</button>
-    <div class="feats">
-        <div class="feat">💬 Free messaging</div><div class="feat">🎮 Gamertag sharing</div>
-        <div class="feat">🏆 Achievements</div><div class="feat">👥 Make friends</div>
-    </div>
-    <div class="stats">
-        <div><div class="stat-n">100%</div><div class="stat-l">Free</div></div>
-        <div><div class="stat-n" id="userCount">0</div><div class="stat-l">Users</div></div>
-        <div><div class="stat-n">24/7</div><div class="stat-l">Support</div></div>
-    </div>
-    <div class="featured">
-        <h3>✨ Featured Members</h3>
-        <div class="featured-cards" id="featuredUsers"></div>
-    </div>
-</div></div>
-
-<div class="container hidden" id="app"></div>
-
-<!-- Signup Modal -->
-<div class="modal" id="suM"><div class="mc">
-    <span class="close" onclick="closeM('suM')">×</span>
-    <h2 style="margin-bottom:12px">Join NextFlame 🔥</h2>
-    
-    <div class="oauth-btn" onclick="alert('Connect your Google account\n\nTo enable: Add your Google OAuth Client ID in the code')">
-        🔐 Continue with Google
-    </div>
-    <div class="oauth-btn" onclick="alert('Connect your Microsoft account\n\nTo enable: Add your Microsoft OAuth credentials in the code')">
-        🔐 Continue with Microsoft
-    </div>
-    <div class="oauth-btn" onclick="alert('Connect your Discord account\n\nTo enable: Add your Discord OAuth credentials in the code')">
-        🔐 Continue with Discord
-    </div>
-    
-    <div class="divider"><span>or</span></div>
-    
-    <form id="suF" onsubmit="handleSignup(event)">
-        <div class="fr">
-            <div class="fg"><label>Email</label><input type="email" id="sE" required></div>
-            <div class="fg"><label>Name</label><input id="sN" required></div>
-        </div>
-        <div class="fr">
-            <div class="fg"><label>Password</label><input type="password" id="sP" required minlength="8"></div>
-            <div class="fg"><label>DOB (18+)</label><input type="date" id="sD" required></div>
-        </div>
-        <div class="fr">
-            <div class="fg"><label>City</label><input id="sC" required placeholder="e.g. Los Angeles"></div>
-            <div class="fg"><label>ZIP (Optional)</label><input id="sZ" pattern="[0-9]{5}" placeholder="12345"></div>
-        </div>
-        <div class="fr">
-            <div class="fg"><label>I'm a</label><select id="sG" required><option value="">-</option><option>Man</option><option>Woman</option><option>Non-binary</option></select></div>
-            <div class="fg"><label>Looking for</label><select id="sL" required><option value="">-</option><option value="dating">💕 Dating</option><option value="friends">👥 Friends</option><option value="both">💕👥 Both</option></select></div>
-        </div>
-        <div class="fg"><label>Vibes</label><div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px">
-            <label><input type="checkbox" id="vG">🎮Gamer</label><label><input type="checkbox" id="vS">🌿Stoner</label>
-            <label><input type="checkbox" id="vA">🎨Artist</label><label><input type="checkbox" id="vN">🤓Nerd</label>
-        </div></div>
-        <div class="fg"><label>Bio (50+)</label><textarea id="sB" required minlength="50" rows="2" placeholder="Tell people about yourself, your hobbies, what you're looking for..."></textarea></div>
-        <div class="fg"><label style="font-size:10px"><input type="checkbox" required> I'm 18+ and agree to Terms</label></div>
-        <div class="consent-box">
-            <label><input type="checkbox" id="consentFeatured"> 
-            <span><strong>Optional:</strong> Feature me on homepage</span></label>
-        </div>
-        <button type="submit" class="bp" style="width:100%;padding:11px">Create Account (+100🪙)</button>
-    </form>
-</div></div>
-
-<!-- Login Modal -->
-<div class="modal" id="liM"><div class="mc">
-    <span class="close" onclick="closeM('liM')">×</span>
-    <h2 style="margin-bottom:12px">Welcome Back 🔥</h2>
-    
-    <div class="oauth-btn" onclick="alert('Connect your Google account\n\nTo enable: Add your Google OAuth Client ID in the code')">
-        🔐 Continue with Google
-    </div>
-    <div class="oauth-btn" onclick="alert('Connect your Microsoft account\n\nTo enable: Add your Microsoft OAuth credentials in the code')">
-        🔐 Continue with Microsoft
-    </div>
-    <div class="oauth-btn" onclick="alert('Connect your Discord account\n\nTo enable: Add your Discord OAuth credentials in the code')">
-        🔐 Continue with Discord
-    </div>
-    
-    <div class="divider"><span>or</span></div>
-    
-    <form id="liF" onsubmit="handleLogin(event)">
-        <div class="fg"><label>Email</label><input type="email" id="lE" required></div>
-        <div class="fg"><label>Password</label><input type="password" id="lP" required></div>
-        <button type="submit" class="bp" style="width:100%;padding:11px">Sign In</button>
-    </form>
-</div></div>
-
-<!-- Admin Modal -->
-<div class="modal" id="adM"><div class="mc wide">
-    <span class="close" onclick="closeM('adM')">×</span>
-    <h2 style="margin-bottom:10px">🛡️ Admin Panel</h2>
-    <div class="tabs" id="aT">
-        <div class="tab active" data-t="users" onclick="setAdminTab('users')">👥Users</div>
-        <div class="tab" data-t="badges" onclick="setAdminTab('badges')">🏅Badges</div>
-        <div class="tab" data-t="credits" onclick="setAdminTab('credits')">🪙Credits</div>
-        <div class="tab" data-t="settings" onclick="setAdminTab('settings')">⚙️Settings</div>
-        <div class="tab" data-t="logs" onclick="setAdminTab('logs')">📜Logs</div>
-    </div>
-    <div id="aC"></div>
-</div></div>
-
-<!-- Friends Modal -->
-<div class="modal" id="frM"><div class="mc wide">
-    <span class="close" onclick="closeM('frM')">×</span>
-    <h2 style="margin-bottom:10px">👥 Friends</h2>
-    <div id="frContent"></div>
-</div></div>
+<div id="app"></div>
 
 <script>
 const FE = 'tannerkurrasch@gmail.com';
 const vi = {gamer: '🎮', stoner: '🌿', artist: '🎨', nerd: '🤓'};
 let me = null;
-let currentView = 'hero';
-let adminTab = 'users';
-
-const ACHIEVEMENTS = [
-    {id:'welcome',n:'🎉 Welcome',d:'Join NextFlame',req:0,r:'signup'},
-    {id:'chatty',n:'💬 Chatty',d:'Send 10 messages',req:10,r:'msgs'},
-    {id:'social',n:'👥 Social Butterfly',d:'Make 5 friends',req:5,r:'friends'},
-    {id:'active',n:'🔥 Active User',d:'7 day login streak',req:7,r:'streak'},
-    {id:'booster',n:'⚡ Booster',d:'Use 5 boosts',req:5,r:'boosts'},
-    {id:'rich',n:'💰 Credit Master',d:'Earn 1000 credits',req:1000,r:'totalCredits'},
-    {id:'popular',n:'⭐ Popular',d:'Get 10 profile visits',req:10,r:'visits'},
-    {id:'gamer',n:'🎮 Gamer Pro',d:'Add 3 gamertags',req:3,r:'gamertags'},
-];
-
+let view = 'feed';
 let DB = {
-    users: [],
-    posts: [],
-    friendReqs: [],
-    badges: [
-        {id:'founder',n:'👑 Founder',c:'b-founder'},{id:'verified',n:'✓ Verified',c:'b-verified'},
-        {id:'stoner',n:'🌿 Stoner',c:'b-stoner'},{id:'artist',n:'🎨 Artist',c:'b-artist'},
-        {id:'gamer',n:'🎮 Gamer',c:'b-gamer'},{id:'nerd',n:'🤓 Nerd',c:'b-nerd'},
-        {id:'og',n:'⭐ OG',c:'b-og'},{id:'vip',n:'💎 VIP',c:'b-vip'},
-        {id:'welcome',n:'🎉 Welcome',c:'b-welcome'},{id:'chatty',n:'💬 Chatty',c:'b-chatty'},
-        {id:'active',n:'🔥 Active',c:'b-active'},{id:'booster',n:'⚡ Booster',c:'b-booster'},
-        {id:'social',n:'👥 Social',c:'b-social'},{id:'streak',n:'🏆 Streak Master',c:'b-streak'}
-    ],
-    logs: [],
-    cfg: {daily:10,streak:5,msg:2,boost:50,sboost:150,conCr:200,plusCr:500,premCr:1500,profileView:5,friendAdd:10,gamertagAdd:15,achievementBonus:50}
+    users: JSON.parse(localStorage.getItem('nf_users') || '[]'),
+    posts: JSON.parse(localStorage.getItem('nf_posts') || '[]'),
+    friendReqs: JSON.parse(localStorage.getItem('nf_reqs') || '[]'),
+    cfg: JSON.parse(localStorage.getItem('nf_cfg') || '{"daily":10,"streak":5,"msg":2,"boost":50,"sboost":150}')
 };
 
-// LocalStorage functions
 function save() {
-    localStorage.setItem('nextflame_users', JSON.stringify(DB.users));
-    localStorage.setItem('nextflame_posts', JSON.stringify(DB.posts));
-    localStorage.setItem('nextflame_friendReqs', JSON.stringify(DB.friendReqs));
-    localStorage.setItem('nextflame_badges', JSON.stringify(DB.badges));
-    localStorage.setItem('nextflame_logs', JSON.stringify(DB.logs.slice(0, 200)));
-    localStorage.setItem('nextflame_cfg', JSON.stringify(DB.cfg));
-    if (me) localStorage.setItem('nextflame_session', me.id);
+    localStorage.setItem('nf_users', JSON.stringify(DB.users));
+    localStorage.setItem('nf_posts', JSON.stringify(DB.posts));
+    localStorage.setItem('nf_reqs', JSON.stringify(DB.friendReqs));
+    localStorage.setItem('nf_cfg', JSON.stringify(DB.cfg));
+    if (me) localStorage.setItem('nf_session', me.id);
 }
 
 function load() {
-    const users = localStorage.getItem('nextflame_users');
-    const posts = localStorage.getItem('nextflame_posts');
-    const friendReqs = localStorage.getItem('nextflame_friendReqs');
-    const badges = localStorage.getItem('nextflame_badges');
-    const logs = localStorage.getItem('nextflame_logs');
-    const cfg = localStorage.getItem('nextflame_cfg');
-    const session = localStorage.getItem('nextflame_session');
-    
-    if (users) DB.users = JSON.parse(users);
-    if (posts) DB.posts = JSON.parse(posts);
-    if (friendReqs) DB.friendReqs = JSON.parse(friendReqs);
-    if (badges) DB.badges = JSON.parse(badges);
-    if (logs) DB.logs = JSON.parse(logs);
-    if (cfg) DB.cfg = JSON.parse(cfg);
-    
-    if (session) {
-        me = DB.users.find(u => u.id === session);
-    }
-    
-    renderFeatured();
-    upUI();
+    const sid = localStorage.getItem('nf_session');
+    if (sid) me = DB.users.find(u => u.id === sid);
+    render();
 }
 
-const showM = i => document.getElementById(i).style.display = 'block';
-const closeM = i => document.getElementById(i).style.display = 'none';
-const age = d => {
+function age(d) {
     let b = new Date(d), t = new Date(), a = t.getFullYear() - b.getFullYear();
     if (t.getMonth() < b.getMonth() || (t.getMonth() === b.getMonth() && t.getDate() < b.getDate())) a--;
     return a;
-};
-const log = (a, d) => {DB.logs.unshift({t: Date.now(), a, d, by: me?.name || 'Sys'}); if (DB.logs.length > 200) DB.logs.pop(); save()};
-const bH = ids => ids.map(id => {const b = DB.badges.find(x => x.id === id); return b ? `<span class="badge ${b.c}">${b.n}</span>` : ''}).join('');
-
-function checkAchievements() {
-    if (!me) return [];
-    let awarded = [];
-    
-    ACHIEVEMENTS.forEach(ach => {
-        if (me.achievements && me.achievements.includes(ach.id)) return;
-        
-        let unlocked = false;
-        if (ach.r === 'signup') unlocked = true;
-        else if (ach.r === 'msgs') unlocked = me.msgs >= ach.req;
-        else if (ach.r === 'friends') unlocked = (me.friends || []).length >= ach.req;
-        else if (ach.r === 'streak') unlocked = me.streak >= ach.req;
-        else if (ach.r === 'boosts') unlocked = (me.boostsUsed || 0) >= ach.req;
-        else if (ach.r === 'totalCredits') unlocked = (me.totalEarned || 0) >= ach.req;
-        else if (ach.r === 'visits') unlocked = (me.profileViews || 0) >= ach.req;
-        else if (ach.r === 'gamertags') unlocked = (me.gamertags || []).length >= ach.req;
-        
-        if (unlocked) {
-            if (!me.achievements) me.achievements = [];
-            me.achievements.push(ach.id);
-            if (!me.badges.includes(ach.id)) me.badges.push(ach.id);
-            me.credits += DB.cfg.achievementBonus;
-            me.totalEarned += DB.cfg.achievementBonus;
-            log('achievement', `${me.name}: ${ach.n} (+${DB.cfg.achievementBonus})`);
-            awarded.push(ach);
-        }
-    });
-    
-    if (awarded.length > 0) save();
-    return awarded;
 }
 
-function renderFeatured() {
-    const fc = document.getElementById('featuredUsers');
-    const featured = DB.users.filter(u => u.consentFeatured && u.status === 'active');
-    document.getElementById('userCount').textContent = DB.users.length;
-    
-    if (featured.length === 0) {
-        fc.innerHTML = `<div style="padding:40px;color:rgba(255,255,255,0.4);font-size:12px">Be the first to be featured!<br><small>Opt-in during signup.</small></div>`;
-    } else {
-        fc.innerHTML = featured.slice(0, 6).map(u => `
-            <div class="fcard">
-                <div class="av">${u.name.charAt(0).toUpperCase()}</div>
-                <div class="nm">${u.name}</div>
-                <div class="ag">${u.age}</div>
-                <div class="vi">${u.vibes.map(v => vi[v]).join('')}</div>
-            </div>
-        `).join('');
-    }
+function timeAgo(t) {
+    const s = Math.floor((Date.now() - t) / 1000);
+    if (s < 60) return 'Just now';
+    if (s < 3600) return `${Math.floor(s / 60)}m`;
+    if (s < 86400) return `${Math.floor(s / 3600)}h`;
+    return `${Math.floor(s / 86400)}d`;
 }
 
-function handleSignup(e) {
+function signup(e) {
     e.preventDefault();
-    const em = document.getElementById('sE').value;
-    if (age(document.getElementById('sD').value) < 18) return alert('18+ only');
-    if (DB.users.find(u => u.email === em)) return alert('Email exists');
+    const f = e.target;
+    if (age(f.dob.value) < 18) return alert('18+ only');
+    if (DB.users.find(u => u.email === f.email.value)) return alert('Email exists');
     
     const v = [];
-    if (document.getElementById('vG').checked) v.push('gamer');
-    if (document.getElementById('vS').checked) v.push('stoner');
-    if (document.getElementById('vA').checked) v.push('artist');
-    if (document.getElementById('vN').checked) v.push('nerd');
+    if (f.vibe_gamer.checked) v.push('gamer');
+    if (f.vibe_stoner.checked) v.push('stoner');
+    if (f.vibe_artist.checked) v.push('artist');
+    if (f.vibe_nerd.checked) v.push('nerd');
     
-    if (v.length === 0) return alert('Select at least one vibe');
-    
-    const isF = em.toLowerCase() === FE.toLowerCase();
-    const u = {
+    const isF = f.email.value.toLowerCase() === FE.toLowerCase();
+    me = {
         id: 'u' + Date.now(),
-        email: em,
-        pw: btoa(document.getElementById('sP').value),
-        name: document.getElementById('sN').value,
-        dob: document.getElementById('sD').value,
-        age: age(document.getElementById('sD').value),
-        city: document.getElementById('sC').value,
-        zipCode: document.getElementById('sZ').value || null,
-        gender: document.getElementById('sG').value,
-        lookingFor: document.getElementById('sL').value,
+        email: f.email.value,
+        pw: btoa(f.password.value),
+        name: f.name.value,
+        dob: f.dob.value,
+        age: age(f.dob.value),
+        city: f.city.value,
+        zip: f.zip.value || null,
+        gender: f.gender.value,
+        lookingFor: f.looking_for.value,
         vibes: v,
-        bio: document.getElementById('sB').value,
+        bio: f.bio.value,
         badges: isF ? ['founder', 'welcome'] : ['welcome'],
-        achievements: ['welcome'],
         credits: 100,
-        totalEarned: 100,
         streak: 0,
         lastD: null,
-        sub: 'free',
         msgs: 0,
-        warns: 0,
         admin: isF,
         founder: isF,
         status: 'active',
         joined: Date.now(),
-        consentFeatured: document.getElementById('consentFeatured').checked,
+        featured: f.consent_featured.checked,
         gamertags: [],
-        friends: [],
-        boostsUsed: 0,
-        profileViews: 0
+        friends: []
     };
     
-    DB.users.push(u);
-    log('signup', u.name);
+    DB.users.push(me);
     save();
-    me = u;
-    closeM('suM');
-    alert('Welcome!🔥+100 credits\n🏆 Achievement: Welcome!' + (isF ? '\n👑FOUNDER ACCESS!' : ''));
-    checkAchievements();
-    renderFeatured();
-    upUI();
+    alert('Welcome! 🔥 +100 credits' + (isF ? '\n👑 FOUNDER ACCESS!' : ''));
+    render();
 }
 
-function handleLogin(e) {
+function login(e) {
     e.preventDefault();
-    const u = DB.users.find(x => x.email === document.getElementById('lE').value);
-    if (!u || u.pw !== btoa(document.getElementById('lP').value)) return alert('Invalid');
+    const f = e.target;
+    const u = DB.users.find(x => x.email === f.email.value);
+    if (!u || u.pw !== btoa(f.password.value)) return alert('Invalid');
     if (u.status === 'banned') return alert('Banned');
     me = u;
     save();
-    closeM('liM');
-    chkDaily();
-    upUI();
-}
-
-function chkDaily() {
-    if (!me) return;
+    
+    // Daily reward
     const td = new Date().toDateString();
-    if (me.lastD === td) return;
-    const yd = new Date(Date.now() - 864e5).toDateString();
-    me.streak = me.lastD === yd ? me.streak + 1 : 1;
-    const r = DB.cfg.daily + (me.streak * DB.cfg.streak);
-    me.credits += r;
-    me.totalEarned = (me.totalEarned || 0) + r;
-    me.lastD = td;
-    log('daily', me.name + '+' + r);
-    save();
-    const newAch = checkAchievements();
-    let msg = '🎁+' + r + ' credits!\n🔥' + me.streak + ' day streak!';
-    if (newAch.length > 0) {
-        newAch.forEach(a => msg += '\n🏆 ' + a.n + ' unlocked!');
+    if (me.lastD !== td) {
+        const yd = new Date(Date.now() - 864e5).toDateString();
+        me.streak = me.lastD === yd ? me.streak + 1 : 1;
+        const r = DB.cfg.daily + (me.streak * DB.cfg.streak);
+        me.credits += r;
+        me.lastD = td;
+        save();
+        setTimeout(() => alert(`🎁 +${r} credits!\n🔥 ${me.streak} day streak!`), 200);
     }
-    setTimeout(() => alert(msg), 200);
+    
+    render();
 }
 
 function logout() {
     me = null;
-    localStorage.removeItem('nextflame_session');
-    upUI();
-}
-
-function goHome() {
-    showView(me ? 'dashboard' : 'hero');
-}
-
-function showView(view) {
-    currentView = view;
-    document.getElementById('hero').style.display = view === 'hero' ? 'block' : 'none';
-    document.getElementById('app').classList.toggle('hidden', view === 'hero');
-    
-    if (view === 'dashboard') rDash();
-    else if (view === 'feed') rFeed();
-    else if (view === 'friends') {showM('frM'); rFriends();}
-    else if (view === 'admin') {showM('adM'); rAdmin('users');}
-}
-
-function upUI() {
-    const on = !!me;
-    document.getElementById('hero').style.display = on ? 'none' : 'block';
-    document.getElementById('app').classList.toggle('hidden', !on);
-    document.getElementById('liBtn').classList.toggle('hidden', on);
-    document.getElementById('suBtn').classList.toggle('hidden', on);
-    document.getElementById('daBtn').classList.toggle('hidden', !on);
-    document.getElementById('feBtn').classList.toggle('hidden', !on);
-    document.getElementById('frBtn').classList.toggle('hidden', !on);
-    document.getElementById('loBtn').classList.toggle('hidden', !on);
-    document.getElementById('cBox').classList.toggle('hidden', !on);
-    document.getElementById('adBtn').classList.toggle('hidden', !on || !me?.admin);
-    if (on) {
-        document.getElementById('cNum').textContent = me.credits;
-        if (currentView === 'hero') showView('dashboard');
-    }
-}
-
-function rDash() {
-    const nx = DB.cfg.daily + ((me.streak + 1) * DB.cfg.streak);
-    const achProgress = ACHIEVEMENTS.map(a => {
-        const unlocked = me.achievements && me.achievements.includes(a.id);
-        let prog = 0;
-        if (a.r === 'msgs') prog = Math.min(100, (me.msgs / a.req) * 100);
-        else if (a.r === 'friends') prog = Math.min(100, ((me.friends || []).length / a.req) * 100);
-        else if (a.r === 'streak') prog = Math.min(100, (me.streak / a.req) * 100);
-        else if (a.r === 'boosts') prog = Math.min(100, ((me.boostsUsed || 0) / a.req) * 100);
-        else if (a.r === 'totalCredits') prog = Math.min(100, ((me.totalEarned || 0) / a.req) * 100);
-        else if (a.r === 'visits') prog = Math.min(100, ((me.profileViews || 0) / a.req) * 100);
-        else if (a.r === 'gamertags') prog = Math.min(100, ((me.gamertags || []).length / a.req) * 100);
-        else if (unlocked) prog = 100;
-        
-        return `<div class="achievement ${unlocked ? '' : 'locked'}">
-            <div class="achievement-icon">${unlocked ? '🏆' : '🔒'}</div>
-            <div style="flex:1">
-                <div><strong>${a.n}</strong> - ${a.d}</div>
-                ${!unlocked ? `<div class="progress-bar"><div class="progress-fill" style="width:${prog}%"></div></div>` : '<div style="color:#22c55e;font-size:10px">✓ Unlocked</div>'}
-            </div>
-        </div>`;
-    }).join('');
-    
-    document.getElementById('app').innerHTML = `
-    <div class="daily"><h3>🎁 Daily</h3><div class="streak">🔥${me.streak} Days</div><p style="font-size:11px">Tomorrow:+${nx}</p></div>
-    
-    <div class="g2">
-        <div class="card">
-            <h3>${me.name}, ${me.age} ${bH(me.badges)}</h3>
-            <p style="font-size:11px;color:rgba(255,255,255,0.6);margin:5px 0">${me.bio}</p>
-            <p style="font-size:11px">📍${me.city}${me.zipCode ? ' ' + me.zipCode : ''} ${me.vibes.map(x => vi[x]).join('')}</p>
-            <p style="font-size:11px;margin-top:4px">💬${me.msgs} msgs • 👥${(me.friends || []).length} friends • ${me.lookingFor === 'dating' ? '💕 Dating' : me.lookingFor === 'friends' ? '👥 Friends' : '💕👥 Both'}</p>
-            <p style="font-size:10px;margin-top:8px;color:rgba(255,255,255,0.4)">Featured: ${me.consentFeatured ? '✅' : '❌'} <button class="bsm bs" onclick="toggleFeatured()">${me.consentFeatured ? 'Opt Out' : 'Opt In'}</button></p>
-        </div>
-        <div class="card">
-            <h3>🪙${me.credits} Credits</h3>
-            <p style="font-size:10px;margin:5px 0;color:rgba(255,255,255,0.5)">Total earned: ${me.totalEarned || 0}</p>
-            <button class="bp bsm" onclick="boost()">⚡Boost(${DB.cfg.boost})</button> 
-            <button class="bp bsm" onclick="sboost()">🚀Super(${DB.cfg.sboost})</button>
-            <p style="font-size:9px;margin-top:5px;color:rgba(255,255,255,0.4)">+${DB.cfg.msg}/msg • +${DB.cfg.profileView}/visit • +${DB.cfg.friendAdd}/friend • +${DB.cfg.gamertagAdd}/tag</p>
-        </div>
-    </div>
-    
-    <h3 style="margin:15px 0 10px">🎮 Gamertags</h3>
-    <div class="card">
-        <div id="gamertagList"></div>
-        <div style="display:flex;gap:6px;margin-top:10px">
-            <select id="gtPlatform" style="padding:7px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:11px">
-                <option value="">Select Platform</option>
-                <option value="Xbox">Xbox</option>
-                <option value="PlayStation">PlayStation</option>
-                <option value="Steam">Steam</option>
-                <option value="Discord">Discord</option>
-                <option value="Roblox">Roblox</option>
-                <option value="Fortnite">Fortnite</option>
-                <option value="ToonTown Rewritten">ToonTown Rewritten</option>
-            </select>
-            <input id="gtTag" placeholder="Your tag..." style="flex:1;padding:7px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:11px">
-            <button class="bp bsm" onclick="addGamertag()">Add</button>
-        </div>
-    </div>
-    
-    <h3 style="margin:15px 0 10px">🏆 Achievements (${me.achievements ? me.achievements.length : 0}/${ACHIEVEMENTS.length})</h3>
-    <div class="card">${achProgress}</div>
-    
-    <button class="bs" style="margin:10px 0" onclick="tMsg()">💬Test Msg(+${DB.cfg.msg})</button>
-    
-    <h3 style="margin:15px 0 10px">💎Subscriptions</h3>
-    <p style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:10px">Click to learn how to enable PayPal payments</p>
-    <div class="g3">
-        <div class="tier"><h3>Connect</h3><div class="tier-p">$3.99</div><div class="tier-c">+${DB.cfg.conCr}/mo</div>
-            <ul class="tier-l"><li>12hr highlight</li><li>5 filters</li><li>30 receipts</li></ul>
-            <button class="bp bsm" onclick="sub('connect',${DB.cfg.conCr})">Get (PayPal)</button></div>
-        <div class="tier"><h3>Plus</h3><div class="tier-p">$8.99</div><div class="tier-c">+${DB.cfg.plusCr}/mo</div>
-            <ul class="tier-l"><li>All Connect</li><li>∞ receipts</li><li>See likes</li></ul>
-            <button class="bp bsm" onclick="sub('plus',${DB.cfg.plusCr})">Get (PayPal)</button></div>
-        <div class="tier"><h3>Premium</h3><div class="tier-p">$19.99</div><div class="tier-c">+${DB.cfg.premCr}/mo</div>
-            <ul class="tier-l"><li>All Plus</li><li>Daily boosts</li><li>Priority</li></ul>
-            <button class="bp bsm" onclick="sub('premium',${DB.cfg.premCr})">Get (PayPal)</button></div>
-    </div>`;
-    
-    renderGamertags();
-}
-
-function renderGamertags() {
-    const list = document.getElementById('gamertagList');
-    if (!list) return;
-    
-    if (!me.gamertags || me.gamertags.length === 0) {
-        list.innerHTML = '<p style="font-size:11px;color:rgba(255,255,255,0.5)">No gamertags yet. Add one!</p>';
-    } else {
-        list.innerHTML = me.gamertags.map((gt, i) => `
-            <div class="gamertag-item">
-                <strong>${gt.platform}:</strong> ${gt.tag}
-                <button class="bd bsm" onclick="removeGamertag(${i})">×</button>
-            </div>
-        `).join('');
-    }
-}
-
-function addGamertag() {
-    const platform = document.getElementById('gtPlatform').value;
-    const tag = document.getElementById('gtTag').value.trim();
-    
-    if (!platform || !tag) return alert('Select platform and enter tag');
-    
-    if (!me.gamertags) me.gamertags = [];
-    if (me.gamertags.length >= 10) return alert('Max 10 gamertags');
-    
-    me.gamertags.push({platform, tag});
-    me.credits += DB.cfg.gamertagAdd;
-    me.totalEarned = (me.totalEarned || 0) + DB.cfg.gamertagAdd;
-    
-    log('gamertag_add', `${me.name}: ${platform} - ${tag}`);
-    save();
-    const newAch = checkAchievements();
-    
-    document.getElementById('gtPlatform').value = '';
-    document.getElementById('gtTag').value = '';
-    
-    let msg = `🎮 Gamertag added! +${DB.cfg.gamertagAdd} credits`;
-    if (newAch.length > 0) {
-        newAch.forEach(a => msg += '\n🏆 ' + a.n + ' unlocked!');
-    }
-    alert(msg);
-    renderGamertags();
-    upUI();
-}
-
-function removeGamertag(index) {
-    me.gamertags.splice(index, 1);
-    log('gamertag_remove', me.name);
-    save();
-    renderGamertags();
-}
-
-function toggleFeatured() {
-    me.consentFeatured = !me.consentFeatured;
-    log('featured_toggle', me.name + ':' + (me.consentFeatured ? 'on' : 'off'));
-    save();
-    renderFeatured();
-    alert(me.consentFeatured ? 'You can now be featured!' : 'No longer featured.');
-    rDash();
-}
-
-function boost() {
-    if (me.credits < DB.cfg.boost) return alert('Need ' + DB.cfg.boost + ' credits!');
-    me.credits -= DB.cfg.boost;
-    me.boostsUsed = (me.boostsUsed || 0) + 1;
-    log('boost', me.name);
-    save();
-    const newAch = checkAchievements();
-    let msg = '⚡Boosted!';
-    if (newAch.length > 0) {
-        newAch.forEach(a => msg += '\n🏆 ' + a.n + ' unlocked!');
-    }
-    alert(msg);
-    upUI();
-}
-
-function sboost() {
-    if (me.credits < DB.cfg.sboost) return alert('Need ' + DB.cfg.sboost + ' credits!');
-    me.credits -= DB.cfg.sboost;
-    me.boostsUsed = (me.boostsUsed || 0) + 1;
-    log('sboost', me.name);
-    save();
-    const newAch = checkAchievements();
-    let msg = '🚀Super Boost!';
-    if (newAch.length > 0) {
-        newAch.forEach(a => msg += '\n🏆 ' + a.n + ' unlocked!');
-    }
-    alert(msg);
-    upUI();
-}
-
-function tMsg() {
-    me.msgs++;
-    me.credits += DB.cfg.msg;
-    me.totalEarned = (me.totalEarned || 0) + DB.cfg.msg;
-    log('msg', me.name);
-    save();
-    const newAch = checkAchievements();
-    let msg = '💬+' + DB.cfg.msg + ' credits';
-    if (newAch.length > 0) {
-        newAch.forEach(a => msg += '\n🏆 ' + a.n + ' unlocked!');
-    }
-    alert(msg);
-    upUI();
-}
-
-function sub(t, c) {
-    if (confirm('To enable PayPal subscriptions:\n\n1. Get PayPal API credentials from developer.paypal.com\n2. Integrate PayPal SDK\n3. Set up subscription plans\n\nFor now, this is a demo. Grant ' + c + ' credits?')) {
-        me.sub = t;
-        me.credits += c;
-        me.totalEarned = (me.totalEarned || 0) + c;
-        log('sub', me.name + ':' + t);
-        save();
-        alert('💎' + t.toUpperCase() + ' activated! +' + c + ' credits');
-        upUI();
-    }
-}
-
-function rFeed() {
-    const posts = DB.posts.sort((a, b) => b.created - a.created);
-    
-    document.getElementById('app').innerHTML = `
-    <div class="card">
-        <textarea id="postContent" placeholder="What's on your mind?" style="width:100%;padding:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;min-height:80px;margin-bottom:10px"></textarea>
-        <input id="postVideo" placeholder="YouTube or video URL (optional)" style="width:100%;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;margin-bottom:10px">
-        <button class="bp" onclick="createPost()">Post</button>
-    </div>
-    
-    <div id="postsList"></div>
-    `;
-    
-    renderPosts();
+    localStorage.removeItem('nf_session');
+    render();
 }
 
 function createPost() {
     const content = document.getElementById('postContent').value.trim();
-    const videoUrl = document.getElementById('postVideo').value.trim();
+    if (!content) return;
     
-    if (!content) return alert('Write something!');
-    
-    const post = {
+    DB.posts.unshift({
         id: 'p' + Date.now(),
         userId: me.id,
         userName: me.name,
-        userBadges: me.badges,
         content,
-        videoUrl: videoUrl || null,
         likes: [],
         comments: [],
         created: Date.now()
-    };
+    });
     
-    DB.posts.push(post);
+    me.msgs++;
+    me.credits += DB.cfg.msg;
     save();
-    
     document.getElementById('postContent').value = '';
-    document.getElementById('postVideo').value = '';
-    renderPosts();
+    render();
 }
 
-function renderPosts() {
-    const list = document.getElementById('postsList');
-    if (!list) return;
-    
-    const posts = DB.posts.sort((a, b) => b.created - a.created);
-    
-    if (posts.length === 0) {
-        list.innerHTML = '<div class="card" style="text-align:center;color:rgba(255,255,255,0.4)">No posts yet. Be the first!</div>';
-        return;
-    }
-    
-    list.innerHTML = posts.map(p => {
-        const timeAgo = getTimeAgo(p.created);
-        const isLiked = p.likes.includes(me.id);
-        
-        return `<div class="post">
-            <div class="post-header">
-                <div class="post-avatar">${p.userName.charAt(0).toUpperCase()}</div>
-                <div style="flex:1">
-                    <div style="font-weight:bold;font-size:14px">${p.userName} ${bH(p.userBadges || [])}</div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.5)">${timeAgo}</div>
-                </div>
-                ${(p.userId === me.id || me.admin) ? `<button class="bd bsm" onclick="deletePost('${p.id}')">Delete</button>` : ''}
-            </div>
-            <div style="margin:12px 0;line-height:1.5">${p.content}</div>
-            ${p.videoUrl ? `<div style="margin-top:10px"><a href="${p.videoUrl}" target="_blank" style="color:#f5576c">🎥 View Video</a></div>` : ''}
-            <div class="post-actions">
-                <div class="post-action" onclick="likePost('${p.id}')">❤️ ${p.likes.length} ${isLiked ? '(Liked)' : ''}</div>
-                <div class="post-action">💬 ${p.comments.length}</div>
-            </div>
-            ${p.comments.length > 0 ? `<div style="margin-top:15px;padding-top:15px;border-top:1px solid rgba(255,255,255,0.05)">
-                ${p.comments.map(c => `<div class="comment">
-                    <strong>${c.userName}</strong> <span style="color:rgba(255,255,255,0.5);font-size:10px">• ${getTimeAgo(c.created)}</span>
-                    <div>${c.content}</div>
-                </div>`).join('')}
-            </div>` : ''}
-            <div style="margin-top:10px;display:flex;gap:8px">
-                <input id="comment_${p.id}" placeholder="Add a comment..." style="flex:1;padding:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:12px">
-                <button class="bp bsm" onclick="addComment('${p.id}')">Send</button>
-            </div>
-        </div>`;
-    }).join('');
-}
-
-function likePost(postId) {
-    const post = DB.posts.find(p => p.id === postId);
-    if (!post) return;
-    
-    if (post.likes.includes(me.id)) {
-        post.likes = post.likes.filter(id => id !== me.id);
-    } else {
-        post.likes.push(me.id);
-    }
-    
+function likePost(pid) {
+    const p = DB.posts.find(x => x.id === pid);
+    if (!p) return;
+    if (p.likes.includes(me.id)) p.likes = p.likes.filter(x => x !== me.id);
+    else p.likes.push(me.id);
     save();
-    renderPosts();
+    render();
 }
 
-function addComment(postId) {
-    const input = document.getElementById('comment_' + postId);
+function addComment(pid) {
+    const input = document.getElementById('ci_' + pid);
     const content = input.value.trim();
     if (!content) return;
     
-    const post = DB.posts.find(p => p.id === postId);
-    if (!post) return;
+    const p = DB.posts.find(x => x.id === pid);
+    if (!p) return;
     
-    post.comments.push({
+    p.comments.push({
         id: 'c' + Date.now(),
         userId: me.id,
         userName: me.name,
@@ -857,98 +287,24 @@ function addComment(postId) {
     
     me.msgs++;
     me.credits += DB.cfg.msg;
-    me.totalEarned = (me.totalEarned || 0) + DB.cfg.msg;
-    
     save();
-    checkAchievements();
     input.value = '';
-    renderPosts();
-    upUI();
-}
-
-function deletePost(postId) {
-    if (!confirm('Delete this post?')) return;
-    DB.posts = DB.posts.filter(p => p.id !== postId);
-    save();
-    renderPosts();
-}
-
-function getTimeAgo(timestamp) {
-    const seconds = Math.floor((Date.now() - timestamp) / 1000);
-    if (seconds < 60) return 'Just now';
-    if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
-    if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
-    return `${Math.floor(seconds / 86400)}d ago`;
-}
-
-function rFriends() {
-    const myReqs = DB.friendReqs.filter(r => r.to === me.id && r.status === 'pending');
-    const sent = DB.friendReqs.filter(r => r.from === me.id && r.status === 'pending');
-    const friends = DB.users.filter(u => (me.friends || []).includes(u.id));
-    const discover = DB.users.filter(u => u.id !== me.id && u.status === 'active' && !(me.friends || []).includes(u.id)).slice(0, 10);
-    
-    document.getElementById('frContent').innerHTML = `
-        <div class="card">
-            <h3 style="margin-bottom:10px">Friend Requests (${myReqs.length})</h3>
-            ${myReqs.length === 0 ? '<p style="font-size:11px;color:rgba(255,255,255,0.5)">No pending requests</p>' : myReqs.map(r => {
-                const from = DB.users.find(u => u.id === r.from);
-                if (!from) return '';
-                return `<div class="friend-req">
-                    <strong>${from.name}</strong>, ${from.age} ${from.vibes.map(v => vi[v]).join('')}
-                    <p style="font-size:10px;margin:5px 0;color:rgba(255,255,255,0.7)">${from.bio.substring(0, 100)}...</p>
-                    <div style="margin-top:8px">
-                        <button class="bg bsm" onclick="acceptFriend('${r.id}')">✓ Accept</button>
-                        <button class="bd bsm" onclick="rejectFriend('${r.id}')">× Decline</button>
-                    </div>
-                </div>`;
-            }).join('')}
-        </div>
-        
-        <div class="card">
-            <h3 style="margin-bottom:10px">My Friends (${friends.length})</h3>
-            ${friends.length === 0 ? '<p style="font-size:11px;color:rgba(255,255,255,0.5)">No friends yet</p>' : friends.map(f => `
-                <div class="friend-card">
-                    <div>
-                        <strong>${f.name}</strong>, ${f.age} ${f.vibes.map(v => vi[v]).join('')}
-                        <div style="font-size:11px;margin-top:3px">${f.lookingFor === 'dating' ? '💕 Dating' : f.lookingFor === 'friends' ? '👥 Friends' : '💕👥 Both'}</div>
-                    </div>
-                    <button class="bd bsm" onclick="removeFriend('${f.id}')">Remove</button>
-                </div>
-            `).join('')}
-        </div>
-        
-        <div class="card">
-            <h3 style="margin-bottom:10px">Sent Requests (${sent.length})</h3>
-            ${sent.length === 0 ? '<p style="font-size:11px;color:rgba(255,255,255,0.5)">None</p>' : sent.map(r => {
-                const to = DB.users.find(u => u.id === r.to);
-                return `<div class="friend-card"><div>${to?.name || 'User'}</div><span style="font-size:11px;color:rgba(255,255,255,0.5)">Pending</span></div>`;
-            }).join('')}
-        </div>
-        
-        <div class="card">
-            <h3 style="margin-bottom:10px">Discover People</h3>
-            ${discover.map(u => `
-                <div class="friend-card">
-                    <div>
-                        <strong>${u.name}</strong>, ${u.age} ${u.vibes.map(v => vi[v]).join('')}
-                        <div style="font-size:11px;margin-top:3px;color:rgba(255,255,255,0.7)">${u.bio.substring(0, 80)}...</div>
-                    </div>
-                    <button class="bp bsm" onclick="sendFriendReq('${u.id}')">Add Friend</button>
-                </div>
-            `).join('') || '<p style="font-size:12px">No users found</p>'}
-        </div>
-    `;
+    render();
 }
 
 function sendFriendReq(toId) {
-    const existing = DB.friendReqs.find(r => r.from === me.id && r.to === toId);
-    if (existing) return alert('Already sent!');
+    if (DB.friendReqs.find(r => r.from === me.id && r.to === toId && r.status === 'pending')) return alert('Already sent!');
     
-    DB.friendReqs.push({id: 'fr' + Date.now(), from: me.id, to: toId, status: 'pending', time: Date.now()});
-    log('friend_req', me.name + ' -> ' + DB.users.find(u => u.id === toId)?.name);
+    DB.friendReqs.push({
+        id: 'fr' + Date.now(),
+        from: me.id,
+        to: toId,
+        status: 'pending',
+        time: Date.now()
+    });
     save();
     alert('Friend request sent!');
-    rFriends();
+    render();
 }
 
 function acceptFriend(reqId) {
@@ -965,195 +321,401 @@ function acceptFriend(reqId) {
         other.friends.push(me.id);
     }
     
-    me.credits += DB.cfg.friendAdd;
-    me.totalEarned = (me.totalEarned || 0) + DB.cfg.friendAdd;
-    
-    log('friend_accept', me.name + ' + ' + other?.name);
+    me.credits += 10;
     save();
-    const newAch = checkAchievements();
+    alert('Friend added! +10 credits');
+    render();
+}
+
+function render() {
+    const app = document.getElementById('app');
     
-    let msg = `Friend added! +${DB.cfg.friendAdd} credits`;
-    if (newAch.length > 0) {
-        newAch.forEach(a => msg += '\n🏆 ' + a.n + ' unlocked!');
-    }
-    alert(msg);
-    
-    rFriends();
-    upUI();
-}
-
-function rejectFriend(reqId) {
-    const req = DB.friendReqs.find(r => r.id === reqId);
-    if (req) req.status = 'rejected';
-    save();
-    rFriends();
-}
-
-function removeFriend(fid) {
-    if (!confirm('Remove this friend?')) return;
-    me.friends = me.friends.filter(id => id !== fid);
-    const other = DB.users.find(u => u.id === fid);
-    if (other && other.friends) other.friends = other.friends.filter(id => id !== me.id);
-    save();
-    rFriends();
-}
-
-function setAdminTab(tab) {
-    adminTab = tab;
-    document.querySelectorAll('#aT .tab').forEach(t => t.classList.remove('active'));
-    document.querySelector(`#aT .tab[data-t="${tab}"]`).classList.add('active');
-    rAdmin(tab);
-}
-
-function rAdmin(t) {
-    const c = document.getElementById('aC');
-    if (t === 'users') {
-        c.innerHTML = `<div class="card"><h3 style="margin-bottom:10px">Users(${DB.users.length})</h3>${DB.users.map(u => `<div class="urow">
-            <div><b>${u.name}</b> ${bH(u.badges)} <span style="color:${u.status === 'active' ? '#22c55e' : '#ef4444'}">[${u.status}]</span> ${u.consentFeatured ? '⭐' : ''}<br>
-            <small>${u.email}•🪙${u.credits}•${u.sub}•👥${(u.friends || []).length}</small></div>
-            <div>
-                <button class="bsm bg" onclick="gBadge('${u.id}')">+Badge</button>
-                <button class="bsm bs" onclick="gCred('${u.id}')">+Cred</button>
-                <button class="bsm bd" onclick="banU('${u.id}')">${u.status === 'banned' ? 'Unban' : 'Ban'}</button>
-                ${!u.admin ? `<button class="bsm bp" onclick="mkAdmin('${u.id}')">Admin</button>` : ''}
-            </div></div>`).join('') || '<p>No users</p>'}</div>`;
-    } else if (t === 'badges') {
-        c.innerHTML = `<div class="card"><h3 style="margin-bottom:10px">Badges</h3><p style="margin-bottom:10px">${DB.badges.map(b => `<span class="badge ${b.c}">${b.n}</span>`).join(' ')}</p>
-            <h4 style="margin:10px 0 8px;font-size:12px">Create Badge</h4>
-            <div style="display:flex;gap:6px"><input id="nBN" placeholder="🏆 Name" style="flex:1;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px;border:1px solid rgba(255,255,255,0.2)">
-            <button class="bp" onclick="mkBadge()">Create</button></div></div>`;
-    } else if (t === 'credits') {
-        c.innerHTML = `<div class="card"><h3 style="margin-bottom:10px">Give Credits</h3>
-            <div style="display:flex;gap:6px;margin-bottom:10px">
-                <select id="gU" style="flex:1;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px">${DB.users.map(u => `<option value="${u.id}">${u.name}(${u.credits})</option>`).join('')}</select>
-                <input type="number" id="gA" value="100" style="width:80px;padding:7px;background:rgba(0,0,0,0.3);color:#fff;border-radius:5px">
-                <button class="bg" onclick="giveC()">Give</button>
+    if (!me) {
+        app.innerHTML = `
+            <div class="landing">
+                <div class="landing-content">
+                    <div class="landing-left">
+                        <h1 class="landing-logo">🔥 NextFlame</h1>
+                        <p class="landing-tagline">Connect with gamers, stoners, artists & nerds. Find your vibe, find your tribe.</p>
+                    </div>
+                    <div class="landing-right">
+                        <div class="landing-card">
+                            <h2>Join NextFlame</h2>
+                            <p style="color:rgba(255,255,255,0.7);margin-bottom:20px">Dating & Friends for your community</p>
+                            <button class="landing-btn" onclick="showAuth()">Get Started</button>
+                            <div class="landing-features">
+                                <div class="landing-feature">💬 Free messaging</div>
+                                <div class="landing-feature">🎮 Gamertags</div>
+                                <div class="landing-feature">🏆 Achievements</div>
+                                <div class="landing-feature">👥 Make friends</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="bs bsm" onclick="giveAll(50)">+50 All</button>
-            <button class="bs bsm" onclick="giveAll(100)">+100 All</button>
-            <button class="bs bsm" onclick="giveAll(500)">+500 All</button>
-        </div>`;
-    } else if (t === 'settings') {
-        c.innerHTML = `<div class="card"><h3 style="margin-bottom:10px">Credit Rewards</h3><div class="g2">
-            <div class="fg"><label>Daily Base</label><input type="number" id="cD" value="${DB.cfg.daily}"></div>
-            <div class="fg"><label>Streak Bonus</label><input type="number" id="cS" value="${DB.cfg.streak}"></div>
-            <div class="fg"><label>Message Reward</label><input type="number" id="cM" value="${DB.cfg.msg}"></div>
-            <div class="fg"><label>Profile View</label><input type="number" id="cPV" value="${DB.cfg.profileView}"></div>
-            <div class="fg"><label>Friend Add</label><input type="number" id="cFA" value="${DB.cfg.friendAdd}"></div>
-            <div class="fg"><label>Gamertag Add</label><input type="number" id="cGT" value="${DB.cfg.gamertagAdd}"></div>
-            <div class="fg"><label>Achievement Bonus</label><input type="number" id="cAch" value="${DB.cfg.achievementBonus}"></div>
-            <div class="fg"><label>Boost Cost</label><input type="number" id="cB" value="${DB.cfg.boost}"></div>
-            <div class="fg"><label>Super Boost Cost</label><input type="number" id="cSB" value="${DB.cfg.sboost}"></div>
-            <div class="fg"><label>Connect Credits</label><input type="number" id="cCon" value="${DB.cfg.conCr}"></div>
-            <div class="fg"><label>Plus Credits</label><input type="number" id="cPlus" value="${DB.cfg.plusCr}"></div>
-            <div class="fg"><label>Premium Credits</label><input type="number" id="cPrem" value="${DB.cfg.premCr}"></div>
-        </div><button class="bp" style="margin-top:10px" onclick="saveCfg()">Save Settings</button></div>`;
-    } else if (t === 'logs') {
-        c.innerHTML = `<div class="card"><h3 style="margin-bottom:10px">Activity Logs (${DB.logs.length})</h3>${DB.logs.slice(0, 50).map(l => `<div style="font-size:10px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.05)"><b>${l.a}</b>: ${l.d} <small style="color:rgba(255,255,255,0.4)">by ${l.by}</small></div>`).join('') || '<p>No logs</p>'}</div>`;
+        `;
+        return;
     }
+    
+    const friendReqs = DB.friendReqs.filter(r => r.to === me.id && r.status === 'pending');
+    const discover = DB.users.filter(u => u.id !== me.id && u.status === 'active' && !(me.friends || []).includes(u.id)).slice(0, 5);
+    
+    app.innerHTML = `
+        <div class="fb-layout">
+            <!-- Top Nav -->
+            <nav class="fb-topnav">
+                <div class="fb-topnav-left">
+                    <div class="fb-logo" onclick="view='feed';render()">🔥 NextFlame</div>
+                    <div class="fb-search"><input type="text" placeholder="Search NextFlame"></div>
+                </div>
+                <div class="fb-topnav-center">
+                    <div class="fb-nav-icon ${view === 'feed' ? 'active' : ''}" onclick="view='feed';render()">
+                        <span>🏠</span>
+                    </div>
+                    <div class="fb-nav-icon ${view === 'friends' ? 'active' : ''}" onclick="view='friends';render()">
+                        <span>👥</span>
+                        ${friendReqs.length > 0 ? `<span class="fb-badge">${friendReqs.length}</span>` : ''}
+                    </div>
+                </div>
+                <div class="fb-topnav-right">
+                    <div class="fb-credits">🪙 ${me.credits}</div>
+                    <div class="fb-profile-menu">
+                        <div class="fb-avatar">${me.name.charAt(0).toUpperCase()}</div>
+                        <div class="fb-dropdown">
+                            <div class="fb-dropdown-item" onclick="view='profile';render()">👤 Profile</div>
+                            <div class="fb-dropdown-item" onclick="view='dashboard';render()">📊 Dashboard</div>
+                            ${me.admin ? '<div class="fb-dropdown-item" onclick="view=\'admin\';render()">🛡️ Admin</div>' : ''}
+                            <div class="fb-dropdown-item" onclick="logout()">🚪 Logout</div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Main -->
+            <div class="fb-main">
+                <!-- Left Sidebar -->
+                <div class="fb-sidebar-left">
+                    <div class="fb-sidebar-item" onclick="view='feed';render()">
+                        <span class="fb-sidebar-icon">🏠</span>
+                        <span>News Feed</span>
+                    </div>
+                    <div class="fb-sidebar-item" onclick="view='profile';render()">
+                        <span class="fb-sidebar-icon">👤</span>
+                        <span>${me.name}</span>
+                    </div>
+                    <div class="fb-sidebar-item" onclick="view='friends';render()">
+                        <span class="fb-sidebar-icon">👥</span>
+                        <span>Friends</span>
+                        ${friendReqs.length > 0 ? `<span class="fb-badge">${friendReqs.length}</span>` : ''}
+                    </div>
+                    <div class="fb-sidebar-item" onclick="view='dashboard';render()">
+                        <span class="fb-sidebar-icon">📊</span>
+                        <span>Dashboard</span>
+                    </div>
+                    ${me.admin ? '<div class="fb-sidebar-item" onclick="view=\'admin\';render()"><span class="fb-sidebar-icon">🛡️</span><span>Admin Panel</span></div>' : ''}
+                </div>
+                
+                <!-- Center Content -->
+                <div class="fb-content">
+                    ${renderView()}
+                </div>
+                
+                <!-- Right Sidebar -->
+                <div class="fb-sidebar-right">
+                    <div class="fb-widget">
+                        <h3>Friend Requests</h3>
+                        ${friendReqs.length === 0 ? '<p style="color:rgba(255,255,255,0.5);font-size:13px">No new requests</p>' : friendReqs.map(req => {
+                            const from = DB.users.find(u => u.id === req.from);
+                            return `<div class="fb-friend-suggestion">
+                                <div class="fb-avatar-sm">${from?.name?.charAt(0).toUpperCase()}</div>
+                                <div style="flex:1">
+                                    <div class="fb-friend-name">${from?.name}</div>
+                                    <button class="fb-btn-primary" style="padding:4px 12px;font-size:12px;margin-top:4px" onclick="acceptFriend('${req.id}')">Accept</button>
+                                </div>
+                            </div>`;
+                        }).join('')}
+                    </div>
+                    
+                    <div class="fb-widget">
+                        <h3>Discover People</h3>
+                        ${discover.map(u => `<div class="fb-friend-suggestion">
+                            <div class="fb-avatar-sm">${u.name.charAt(0).toUpperCase()}</div>
+                            <div style="flex:1">
+                                <div class="fb-friend-name">${u.name}</div>
+                                <div style="font-size:11px;color:rgba(255,255,255,0.5)">${u.vibes.map(v => vi[v]).join(' ')}</div>
+                                <button class="fb-btn-secondary" style="padding:4px 12px;font-size:12px;margin-top:4px" onclick="sendFriendReq('${u.id}')">Add Friend</button>
+                            </div>
+                        </div>`).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
-function gBadge(uid) {
-    const opts = DB.badges.map(b => b.id).join(', ');
-    const bid = prompt('Badge ID?\n' + opts);
-    if (!bid) return;
-    const u = DB.users.find(x => x.id === uid);
-    if (u && !u.badges.includes(bid)) {
-        u.badges.push(bid);
-        log('badge', u.name + '+' + bid);
-        save();
-        alert('Badge added!');
-        rAdmin('users');
+function renderView() {
+    if (view === 'feed') {
+        return `
+            <!-- Post Composer -->
+            <div class="fb-card">
+                <div class="fb-composer-top">
+                    <div class="fb-avatar">${me.name.charAt(0).toUpperCase()}</div>
+                    <textarea id="postContent" class="fb-composer-input" placeholder="What's on your mind, ${me.name}?"></textarea>
+                </div>
+                <div class="fb-composer-bottom">
+                    <div style="display:flex;gap:16px;font-size:14px;color:rgba(255,255,255,0.7)">
+                        <span>🎥 Video</span>
+                        <span>📸 Photo</span>
+                    </div>
+                    <button class="fb-btn-primary" onclick="createPost()">Post</button>
+                </div>
+            </div>
+            
+            <!-- Posts -->
+            ${DB.posts.map(p => `
+                <div class="fb-card fb-post">
+                    <div class="fb-post-header">
+                        <div class="fb-avatar">${p.userName.charAt(0).toUpperCase()}</div>
+                        <div style="flex:1">
+                            <div class="fb-post-author">${p.userName}</div>
+                            <div class="fb-post-time">${timeAgo(p.created)}</div>
+                        </div>
+                    </div>
+                    <div class="fb-post-content">${p.content}</div>
+                    <div class="fb-post-stats">
+                        <span>❤️ ${p.likes.length}</span>
+                        <span>💬 ${p.comments.length} comments</span>
+                    </div>
+                    <div class="fb-post-actions">
+                        <button class="fb-post-action ${p.likes.includes(me.id) ? 'active' : ''}" onclick="likePost('${p.id}')">❤️ Like</button>
+                        <button class="fb-post-action">💬 Comment</button>
+                    </div>
+                    ${p.comments.length > 0 ? p.comments.map(c => `
+                        <div class="fb-comment">
+                            <div class="fb-avatar-sm">${c.userName.charAt(0).toUpperCase()}</div>
+                            <div class="fb-comment-content">
+                                <div class="fb-comment-author">${c.userName}</div>
+                                <div class="fb-comment-text">${c.content}</div>
+                            </div>
+                        </div>
+                    `).join('') : ''}
+                    <div style="display:flex;gap:8px;padding-top:8px">
+                        <div class="fb-avatar-sm">${me.name.charAt(0).toUpperCase()}</div>
+                        <input id="ci_${p.id}" class="fb-comment-input" placeholder="Write a comment..." onkeypress="if(event.key==='Enter')addComment('${p.id}')">
+                    </div>
+                </div>
+            `).join('') || '<div class="fb-card" style="text-align:center;padding:40px;color:rgba(255,255,255,0.5)">No posts yet. Be the first to share!</div>'}
+        `;
+    } else if (view === 'profile') {
+        const myPosts = DB.posts.filter(p => p.userId === me.id);
+        return `
+            <div style="margin:-20px -16px 0">
+                <div class="fb-cover"></div>
+                <div class="fb-profile-header">
+                    <div class="fb-profile-avatar">${me.name.charAt(0).toUpperCase()}</div>
+                    <div class="fb-profile-info">
+                        <h1>${me.name}, ${me.age}</h1>
+                        <p style="color:rgba(255,255,255,0.7)">${me.bio}</p>
+                        <div style="display:flex;gap:16px;font-size:14px;color:rgba(255,255,255,0.6);margin-top:8px">
+                            <span>📍 ${me.city}</span>
+                            <span>👥 ${(me.friends || []).length} friends</span>
+                            <span>${me.vibes.map(v => vi[v]).join(' ')}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fb-profile-tabs">
+                    <div class="fb-profile-tab active">Posts</div>
+                    <div class="fb-profile-tab">About</div>
+                    <div class="fb-profile-tab">Friends</div>
+                </div>
+                <div style="padding:16px">
+                    ${myPosts.map(p => `
+                        <div class="fb-card">
+                            <div class="fb-post-content">${p.content}</div>
+                            <div class="fb-post-stats">
+                                <span>❤️ ${p.likes.length}</span>
+                                <span>💬 ${p.comments.length}</span>
+                            </div>
+                        </div>
+                    `).join('') || '<div class="fb-card" style="text-align:center;color:rgba(255,255,255,0.5)">No posts yet</div>'}
+                </div>
+            </div>
+        `;
+    } else if (view === 'friends') {
+        const friendReqs = DB.friendReqs.filter(r => r.to === me.id && r.status === 'pending');
+        const friends = DB.users.filter(u => (me.friends || []).includes(u.id));
+        const discover = DB.users.filter(u => u.id !== me.id && u.status === 'active' && !(me.friends || []).includes(u.id));
+        
+        return `
+            <h1 style="font-size:28px;margin-bottom:20px">Friends</h1>
+            
+            ${friendReqs.length > 0 ? `
+                <div class="fb-card">
+                    <h2 style="font-size:20px;margin-bottom:16px">Friend Requests (${friendReqs.length})</h2>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+                        ${friendReqs.map(req => {
+                            const from = DB.users.find(u => u.id === req.from);
+                            return `<div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:16px;text-align:center">
+                                <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 12px">${from?.name?.charAt(0).toUpperCase()}</div>
+                                <div style="font-weight:600;margin-bottom:8px">${from?.name}</div>
+                                <button class="fb-btn-primary" style="width:100%;margin-bottom:6px" onclick="acceptFriend('${req.id}')">Accept</button>
+                            </div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            ` : ''}
+            
+            <div class="fb-card">
+                <h2 style="font-size:20px;margin-bottom:16px">All Friends (${friends.length})</h2>
+                ${friends.length > 0 ? `
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+                        ${friends.map(f => `<div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:16px;text-align:center">
+                            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 12px">${f.name.charAt(0).toUpperCase()}</div>
+                            <div style="font-weight:600">${f.name}</div>
+                        </div>`).join('')}
+                    </div>
+                ` : '<p style="text-align:center;color:rgba(255,255,255,0.5);padding:20px">No friends yet</p>'}
+            </div>
+            
+            <div class="fb-card">
+                <h2 style="font-size:20px;margin-bottom:16px">People You May Know</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+                    ${discover.slice(0, 12).map(u => `<div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:16px;text-align:center">
+                        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 12px">${u.name.charAt(0).toUpperCase()}</div>
+                        <div style="font-weight:600;margin-bottom:4px">${u.name}</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:8px">${u.vibes.map(v => vi[v]).join(' ')}</div>
+                        <button class="fb-btn-primary" style="width:100%" onclick="sendFriendReq('${u.id}')">Add Friend</button>
+                    </div>`).join('')}
+                </div>
+            </div>
+        `;
+    } else if (view === 'dashboard') {
+        const nx = DB.cfg.daily + ((me.streak + 1) * DB.cfg.streak);
+        return `
+            <h1 style="font-size:28px;margin-bottom:20px">Dashboard</h1>
+            
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px">
+                <div class="fb-card" style="text-align:center;background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,140,0,0.1));border-color:rgba(255,215,0,0.3)">
+                    <h3>🎁 Daily Reward</h3>
+                    <div style="font-size:36px;font-weight:bold;margin:16px 0">🔥 ${me.streak} Days</div>
+                    <p style="font-size:13px">Tomorrow: +${nx} credits</p>
+                </div>
+                
+                <div class="fb-card" style="text-align:center">
+                    <h3>🪙 Credits</h3>
+                    <div style="font-size:48px;font-weight:bold;margin:16px 0;background:linear-gradient(135deg,#ffd700,#ff8c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${me.credits}</div>
+                    <p style="font-size:12px;color:rgba(255,255,255,0.5)">+${DB.cfg.msg} per message</p>
+                </div>
+            </div>
+            
+            <div class="fb-card">
+                <h3 style="margin-bottom:16px">💎 Subscriptions</h3>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+                    <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:20px;text-align:center">
+                        <h4 style="color:#f5576c;margin-bottom:8px">Connect</h4>
+                        <div style="font-size:28px;font-weight:bold">$3.99</div>
+                        <p style="font-size:12px;margin:8px 0">+200 credits/mo</p>
+                        <button class="fb-btn-secondary" style="width:100%;margin-top:8px">Learn More</button>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:20px;text-align:center">
+                        <h4 style="color:#f5576c;margin-bottom:8px">Plus</h4>
+                        <div style="font-size:28px;font-weight:bold">$8.99</div>
+                        <p style="font-size:12px;margin:8px 0">+500 credits/mo</p>
+                        <button class="fb-btn-secondary" style="width:100%;margin-top:8px">Learn More</button>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:20px;text-align:center">
+                        <h4 style="color:#f5576c;margin-bottom:8px">Premium</h4>
+                        <div style="font-size:28px;font-weight:bold">$19.99</div>
+                        <p style="font-size:12px;margin:8px 0">+1500 credits/mo</p>
+                        <button class="fb-btn-secondary" style="width:100%;margin-top:8px">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else if (view === 'admin' && me.admin) {
+        return `
+            <h1 style="font-size:28px;margin-bottom:20px">🛡️ Admin Panel</h1>
+            <div class="fb-card">
+                <h3>Users (${DB.users.length})</h3>
+                <p style="color:rgba(255,255,255,0.7);margin-top:8px">Manage all platform users</p>
+            </div>
+        `;
     }
+    return '';
 }
 
-function gCred(uid) {
-    const amt = parseInt(prompt('Amount?'));
-    if (!amt) return;
-    const u = DB.users.find(x => x.id === uid);
-    if (u) {
-        u.credits += amt;
-        u.totalEarned = (u.totalEarned || 0) + amt;
-        log('give', u.name + '+' + amt);
-        save();
-        alert('Gave ' + amt);
-        rAdmin('users');
-    }
+function showAuth() {
+    document.getElementById('app').innerHTML += `
+        <div class="modal" onclick="if(event.target===this)this.remove()">
+            <div class="modal-content">
+                <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
+                <h2>Join NextFlame</h2>
+                <form onsubmit="signup(event);this.closest('.modal').remove()">
+                    <div class="form-row">
+                        <input name="name" placeholder="Name" required>
+                        <input name="email" type="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-row">
+                        <input name="password" type="password" placeholder="Password (8+)" required minlength="8">
+                        <input name="dob" type="date" required>
+                    </div>
+                    <div class="form-row">
+                        <input name="city" placeholder="City" required>
+                        <input name="zip" placeholder="ZIP (optional)">
+                    </div>
+                    <div class="form-row">
+                        <select name="gender" required>
+                            <option value="">I'm a...</option>
+                            <option>Man</option>
+                            <option>Woman</option>
+                            <option>Non-binary</option>
+                        </select>
+                        <select name="looking_for" required>
+                            <option value="">Looking for...</option>
+                            <option value="dating">💕 Dating</option>
+                            <option value="friends">👥 Friends</option>
+                            <option value="both">💕👥 Both</option>
+                        </select>
+                    </div>
+                    <div style="display:flex;gap:16px;margin-bottom:12px;font-size:14px">
+                        <label><input type="checkbox" name="vibe_gamer"> 🎮 Gamer</label>
+                        <label><input type="checkbox" name="vibe_stoner"> 🌿 Stoner</label>
+                        <label><input type="checkbox" name="vibe_artist"> 🎨 Artist</label>
+                        <label><input type="checkbox" name="vibe_nerd"> 🤓 Nerd</label>
+                    </div>
+                    <textarea name="bio" placeholder="Bio (50+ chars)" required minlength="50" rows="3"></textarea>
+                    <label style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:14px">
+                        <input type="checkbox" name="consent_featured">
+                        <span>Feature me on homepage</span>
+                    </label>
+                    <button type="submit" class="fb-btn-primary" style="width:100%;padding:12px">Sign Up</button>
+                    <p style="text-align:center;margin-top:16px;font-size:14px;color:rgba(255,255,255,0.7)">
+                        Have an account? <button type="button" style="background:none;border:none;color:#f5576c;text-decoration:underline;cursor:pointer" onclick="showLogin()">Log In</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    `;
 }
 
-function banU(uid) {
-    const u = DB.users.find(x => x.id === uid);
-    if (u) {
-        u.status = u.status === 'banned' ? 'active' : 'banned';
-        log(u.status, u.name);
-        save();
-        rAdmin('users');
-    }
-}
-
-function mkAdmin(uid) {
-    const u = DB.users.find(x => x.id === uid);
-    if (u && confirm('Make ' + u.name + ' admin?')) {
-        u.admin = true;
-        log('admin', u.name);
-        save();
-        alert('Admin granted!');
-        rAdmin('users');
-    }
-}
-
-function mkBadge() {
-    const n = document.getElementById('nBN').value;
-    if (!n) return alert('Enter name!');
-    DB.badges.push({id: 'c' + Date.now(), n, c: 'b-custom'});
-    log('badge_create', n);
-    save();
-    alert('Badge created!');
-    rAdmin('badges');
-}
-
-function giveC() {
-    const uid = document.getElementById('gU').value;
-    const amt = parseInt(document.getElementById('gA').value);
-    const u = DB.users.find(x => x.id === uid);
-    if (u && amt) {
-        u.credits += amt;
-        u.totalEarned = (u.totalEarned || 0) + amt;
-        log('give', u.name + '+' + amt);
-        save();
-        alert('Gave ' + amt);
-        rAdmin('credits');
-    }
-}
-
-function giveAll(amt) {
-    if (!confirm('+' + amt + ' to ALL users?')) return;
-    DB.users.forEach(u => {
-        u.credits += amt;
-        u.totalEarned = (u.totalEarned || 0) + amt;
-    });
-    log('give_all', '+' + amt);
-    save();
-    alert('Done! +' + amt + ' to everyone');
-    rAdmin('credits');
-}
-
-function saveCfg() {
-    DB.cfg.daily = parseInt(document.getElementById('cD').value) || 10;
-    DB.cfg.streak = parseInt(document.getElementById('cS').value) || 5;
-    DB.cfg.msg = parseInt(document.getElementById('cM').value) || 2;
-    DB.cfg.profileView = parseInt(document.getElementById('cPV').value) || 5;
-    DB.cfg.friendAdd = parseInt(document.getElementById('cFA').value) || 10;
-    DB.cfg.gamertagAdd = parseInt(document.getElementById('cGT').value) || 15;
-    DB.cfg.achievementBonus = parseInt(document.getElementById('cAch').value) || 50;
-    DB.cfg.boost = parseInt(document.getElementById('cB').value) || 50;
-    DB.cfg.sboost = parseInt(document.getElementById('cSB').value) || 150;
-    DB.cfg.conCr = parseInt(document.getElementById('cCon').value) || 200;
-    DB.cfg.plusCr = parseInt(document.getElementById('cPlus').value) || 500;
-    DB.cfg.premCr = parseInt(document.getElementById('cPrem').value) || 1500;
-    log('settings', 'updated');
-    save();
-    alert('Settings saved!');
+function showLogin() {
+    document.querySelectorAll('.modal').forEach(m => m.remove());
+    document.getElementById('app').innerHTML += `
+        <div class="modal" onclick="if(event.target===this)this.remove()">
+            <div class="modal-content">
+                <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
+                <h2>Log In to NextFlame</h2>
+                <form onsubmit="login(event);this.closest('.modal').remove()">
+                    <input name="email" type="email" placeholder="Email" required>
+                    <input name="password" type="password" placeholder="Password" required>
+                    <button type="submit" class="fb-btn-primary" style="width:100%;padding:12px">Log In</button>
+                    <p style="text-align:center;margin-top:16px;font-size:14px;color:rgba(255,255,255,0.7)">
+                        Don't have an account? <button type="button" style="background:none;border:none;color:#f5576c;text-decoration:underline;cursor:pointer" onclick="showAuth()">Sign Up</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    `;
 }
 
 // Initialize
